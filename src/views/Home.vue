@@ -2,7 +2,7 @@
   <b-container fluid class="p-0 m-0">
     <b-navbar toggleable fixed="top" type="dark">
       <b-navbar-toggle target="nav_dropdown_collapse"></b-navbar-toggle>
-      <b-collapse is-nav id="nav_dropdown_collapse" class="d-flex justify-content-center">
+      <b-collapse is-nav id="nav_dropdown_collapse" :class="customClass">
         <b-navbar-nav id="navbar-scroll">
           <b-nav-item href="#" v-scroll-to="'#banner'">Home</b-nav-item>
           <b-nav-item href="#" v-scroll-to="'#about'">About</b-nav-item>
@@ -40,10 +40,29 @@ export default {
     About,
     Resume,
   },
+  data: () => ({
+    windowWidth: window.innerWidth,
+  }),
+  mounted() {
+    window.addEventListener('resize', this.handleWindowResize);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.handleWindowResize);
+  },
   computed: {
     ...mapState('app', [
       'sector',
     ]),
+    customClass() {
+      return {
+        'd-flex justify-content-center': this.windowWidth > 575,
+      };
+    },
+  },
+  methods: {
+    handleWindowResize(event) {
+      this.windowWidth = event.currentTarget.innerWidth;
+    },
   },
 };
 </script>
