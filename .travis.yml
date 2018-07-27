@@ -1,6 +1,3 @@
-before_install:
-- openssl aes-256-cbc -K $encrypted_5ce6662f555d_key -iv $encrypted_5ce6662f555d_iv
-  -in resume-vcm.json.enc -out resume-vcm.json -d
 language: node_js
 skip_files:
 - "^.*node_modules(/.*)?"
@@ -14,3 +11,6 @@ deploy:
   project: resume-vcm
   skip_cleanup: true
   on: master
+before_install:
+- openssl aes-256-cbc -K $encrypted_5ce6662f555d_key -iv $encrypted_5ce6662f555d_iv
+  -in resume-vcm.json.enc -out resume-vcm.json -d
