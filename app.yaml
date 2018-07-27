@@ -1,0 +1,58 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+skip_files:
+  - node_modules/
+  - npm-debug.log*
+  - yarn-debug.log*
+  - yarn-error.log*
+
+handlers:
+  # Manifest files
+  - url: /(.+\.(appcache))
+    static_files: dist/\1
+    upload: dist/static/(.+\.(appcache))
+    mime_type: text/cache-manifest
+    expiration: "0s"
+    secure: always
+
+  - url: /(.+\.webapp)
+    static_files: dist/\1
+    upload: dist/(.+\.webapp)
+    mime_type: application/x-web-app-manifest+json
+    expiration: "0s"
+    secure: always
+
+  # Fonts and images
+  - url: /(.+\.(eot|otf|tt[cf]|woff2?|cur|gif|ico|jpe?g|png|svgz?|webp))
+    static_files: dist/\1
+    upload: dist/(.+\.(eot|otf|tt[cf]|woff2?|cur|gif|ico|jpe?g|png|svgz?|webp))
+    secure: always
+    http_headers:
+      Access-Control-Allow-Origin: "*"
+
+  # CSS, Javascript, text and other file types
+  - url: /(.+\.(css|js|xml|txt))
+    static_files: dist/\1
+    upload: dist/(.+\.(css|js|xml|txt))
+    expiration: "10m"
+    secure: always
+
+  # HTML pages
+  - url: /(.+\.html)
+    static_files: dist/\1
+    upload: dist/(.+\.html)
+    expiration: "10m"
+    secure: always
+    http_headers:
+      X-UA-Compatible: "IE=edge"
+
+  # Homepage
+  - url: /.*
+    static_files: dist/index.html
+    upload: dist/index\.html
+    expiration: "10m"
+    secure: always
+    http_headers:
+      X-UA-Compatible: "IE=edge"
