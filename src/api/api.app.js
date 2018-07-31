@@ -1,29 +1,45 @@
 import axios from './axios';
 
+const SENDGRID_API_KEY = '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';
+
 export default {
-  getList() {
-    return axios.get('/path');
-  },
-  get(param) {
-    return axios.get(`/path/${param}`);
-  },
-  create({
-    param,
-    data,
+  sendEmail({
+    // name,
+    email,
+    subject,
+    message,
   }) {
-    return axios.post(`/path/${param}`, {
-      data,
+  //   return axios.post('/vcmiranda@outlook.com', {
+  //     name,
+  //     _replyto,
+  //     email,
+  //     _subject,
+  //     message,
+  //   })
+  //     .then(res => console.log(res))
+  //     .catch(err => console.log(err));
+  // },
+
+    return axios('/send', {
+      headers: {
+        Authorization: `Bearer ${SENDGRID_API_KEY}`,
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json, text/plain',
+      },
+      data: {
+        personalizations: [
+          {
+            to: [
+              { email: 'vcmiranda@outlook.com' },
+            ],
+          },
+        ],
+        from: { email },
+        subject,
+        content: [
+          { type: 'text/plain', value: message },
+        ],
+      },
     });
-  },
-  update({
-    param,
-    data,
-  }) {
-    return axios.post(`/path/${param}`, {
-      data,
-    });
-  },
-  delete(param) {
-    return axios.get(`/path/${param}`);
   },
 };

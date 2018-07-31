@@ -1,6 +1,9 @@
+import '@babel/polyfill'
 import Vue from 'vue';
+import './plugins/vuetify'
 import BootstrapVue from 'bootstrap-vue';
 import VueScrollTo from 'vue-scrollto';
+import VueObserveVisibility from 'vue-observe-visibility';
 
 import '@/assets/styles/custom.scss';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -16,6 +19,7 @@ Vue.use(BootstrapVue);
 Vue.use(VueScrollTo, {
   duration: 1000,
 });
+Vue.use(VueObserveVisibility);
 
 new Vue({
   router,

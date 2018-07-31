@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-shadow */
-
+import gapi from 'https://apis.google.com/js/api.js';
 import appAPI from '@/api/api.app';
 
 // Mutations
@@ -50,6 +50,9 @@ const actions = {
       .then(res => console.log(res))
       .catch(err => console.log(err));
   },
+  [CONNECT_EMAIL]() {
+    gapi.load('client:auth2', initClient);
+  }
 };
 
 export default {

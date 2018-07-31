@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid class="p-0 bg-custom-primary">
+  <b-container fluid class="p-5">
   </b-container>
 </template>
 

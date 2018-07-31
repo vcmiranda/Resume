@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid class="p-0 bg-warning">
+  <b-container fluid class="p-0">
     <b-img :src="getImg('img/background/banner.jpg')" alt="Banner" class="customImage"/>
   </b-container>
 </template>
