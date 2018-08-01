@@ -1,7 +1,7 @@
 <template>
-  <b-container fluid class="p-0">
-    <b-img :src="getImg('img/background/banner.jpg')" alt="Banner" class="customImage"/>
-  </b-container>
+  <v-container fluid class="ma-0 pa-0">
+    <v-img :src="getImg('img/background/banner.jpg')" class="customImage"></v-img>
+  </v-container>
 </template>
 
 <script>

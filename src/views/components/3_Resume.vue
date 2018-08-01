@@ -1,6 +1,6 @@
 <template>
-  <b-container fluid class="p-5">
-  </b-container>
+  <v-container fluid class="ma-0 pa-0">
+  </v-container>
 </template>
 
 <script>

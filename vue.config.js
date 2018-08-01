@@ -15,12 +15,4 @@ module.exports = {
       ),
     ],
   },
-  css: {
-    loaderOptions: {
-      sass: {
-        // so this assumes you have a file named `src/assets/styles/custom.scss`
-        data: `@import "@/assets/styles/custom.scss";`,
-      },
-    },
-  },
 };
