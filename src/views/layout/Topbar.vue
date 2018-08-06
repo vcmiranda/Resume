@@ -7,7 +7,7 @@
         <v-btn flat v-scroll-to="'#about'" :ripple="false" class="white--text customBtn">About</v-btn>
         <v-btn flat v-scroll-to="'#resume'" :ripple="false" class="white--text customBtn">Resume</v-btn>
         <v-btn flat :ripple="false" class="white--text customBtn">Works</v-btn>
-        <v-btn flat :ripple="false" class="white--text customBtn">Testemonials</v-btn>
+        <v-btn flat :ripple="false" class="white--text customBtn">Testimonials</v-btn>
         <v-btn flat v-scroll-to="'#contact'" :ripple="false" class="white--text customBtn">Contact</v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
@@ -29,7 +29,7 @@ export default {
   min-width: 0;
   > .v-btn__content {
     &:hover {
-      color: #FF9800;
+      color: #11ABB0;
     }
   }
   &:before {
