@@ -9,7 +9,7 @@ skip_files:
   - yarn-error.log*
 
 handlers:
-  # Manifest files
+  # Manifest docs
   - url: /(.+\.(appcache))
     static_files: dist/\1
     upload: dist/static/(.+\.(appcache))
