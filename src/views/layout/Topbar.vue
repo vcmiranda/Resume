@@ -30,7 +30,18 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped>
+.primary {
+  height: 64px;
+  transition: 0.8s;
+}
+.transparent {
+  height: 64px;
+  transition: 0.8s;
+}
+</style>
+
+<style lang="scss">
 .customBtn {
   height: auto;
   width: auto;
@@ -45,13 +56,4 @@ export default {
     transition: none !important;
   }
 }
-.primary {
-  height: 64px;
-  transition: 0.7s;
-}
-.transparent {
-  height: 64px;
-  transition: 0.7s;
-}
 </style>
-
