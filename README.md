@@ -1,23 +1,28 @@
-# Resume
+# Personal Resume
 
 > My personal resume
 
-## Quick Start
-
-``` bash
-# clone git repository
-git clone https://github.com/vcmiranda/Resume.git
-
-# install dependencies
+## Project setup
+```
 npm install
+```
 
-# serve with hot reload at localhost:3000
-npm run dev
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-## More commands
-``` bash
-
-# build for production with minification
+### Compiles and minifies for production
+```
 npm run build
+```
 
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Run your unit tests
+```
+npm run test:unit
 ```

@@ -1,16 +1,11 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-shadow */
-import gapi from 'https://apis.google.com/js/api.js';
-import appAPI from '@/api/api.app';
 
 // Mutations
 const SET_NAME = 'SET_NAME';
 const SET_EMAIL = 'SET_EMAIL';
 const SET_SUBJECT = 'SET_SUBJECT';
 const SET_MESSAGE = 'SET_MESSAGE';
-
-// Actions
-const SEND_EMAIL = 'SEND_EMAIL';
 
 const state = {
   name: '',
@@ -38,21 +33,6 @@ const mutations = {
 };
 
 const actions = {
-  [SEND_EMAIL]({ state }) {
-    const data = {
-      name: state.name,
-      _replyto: state.email,
-      email: state.email,
-      _subject: state.subject,
-      message: state.message,
-    };
-    return appAPI.sendEmail(data)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-  },
-  [CONNECT_EMAIL]() {
-    gapi.load('client:auth2', initClient);
-  }
 };
 
 export default {

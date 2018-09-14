@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="ma-0 pa-0">
-    <v-toolbar fixed dense class="elevation-0" :class="{ 'primary': !visible, 'transparent': visible }">
+    <v-toolbar fixed :class="classToolbar" prominent>
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-btn flat v-scroll-to="'#banner'" :ripple="false" class="white--text customBtn">Home</v-btn>
@@ -19,10 +19,18 @@
 export default {
   name: 'topbar',
   props: ['visible'],
+  computed: {
+    classToolbar() {
+      return {
+        'elevation-0 primary': !this.visible,
+        'elevation-0 transparent': this.visible,
+      };
+    },
+  },
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .customBtn {
   height: auto;
   width: auto;
@@ -36,6 +44,14 @@ export default {
     background-color: transparent !important;
     transition: none !important;
   }
+}
+.primary {
+  height: 64px;
+  transition: 0.7s;
+}
+.transparent {
+  height: 64px;
+  transition: 0.7s;
 }
 </style>
 
