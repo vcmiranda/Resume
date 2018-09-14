@@ -33,11 +33,6 @@ export default {
       this.isVisible = isVisible;
     },
   },
-  watch: {
-    isVisible(value) {
-      console.log(value);
-    },
-  },
 };
 </script>
 
