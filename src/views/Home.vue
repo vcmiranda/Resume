@@ -1,11 +1,32 @@
 <template>
   <v-container fluid class="ma-0 pa-0">
-    <Topbar :visible="isVisible"></Topbar>
-    <div v-observe-visibility="visibilityChanged"></div>
-    <Banner style="height: 100vh;" class="m-0" id="banner"></Banner>
-    <About style="height: 100vh;" class="ma-0 py-5 primary" id="about"></About>
-    <Resume style="height: 100vh;" class="ma-0 py-5 error" id="resume"></Resume>
-    <Contact style="height: 100vh;" class="ma-0 py-5 primary" id="contact"></Contact>
+    <v-layout row wrap>
+      <v-flex xs12>
+        <Topbar :visible="visibleToolbar"></Topbar>
+      </v-flex>
+      <v-flex xs12 v-observe-visibility="visibilityToolbar"></v-flex>
+      <v-flex xs12>
+        <Banner style="height: 100vh;" class="m-0" id="banner" @visible="visibilityButton"></Banner>
+        <About style="height: 100vh;" class="ma-0 py-5 primary" id="about"></About>
+        <Resume style="height: 100vh;" class="ma-0 py-5 error" id="resume"></Resume>
+        <Contact style="height: 100vh;" class="ma-0 py-5 primary" id="contact"></Contact>
+        <v-fab-transition>
+          <v-btn
+            fab
+            fixed
+            bottom
+            right
+            v-if="!visibleButton"
+            :color="btnColor"
+            v-scroll-to="'#banner'"
+            @mouseover="btnColor = 'white'"
+            @mouseout="btnColor = 'accent'"
+          >
+            <v-icon color="black">keyboard_arrow_up</v-icon>
+          </v-btn>
+        </v-fab-transition>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 
@@ -26,21 +47,17 @@ export default {
     Contact,
   },
   data: () => ({
-    isVisible: true,
+    visibleToolbar: true,
+    visibleButton: false,
+    btnColor: 'accent',
   }),
   methods: {
-    visibilityChanged(isVisible) {
-      this.isVisible = isVisible;
+    visibilityToolbar(isVisible) {
+      this.visibleToolbar = isVisible;
+    },
+    visibilityButton(isVisible) {
+      this.visibleButton = isVisible;
     },
   },
 };
 </script>
-
-<style scoped>
-ul.navbar-nav a {
-  color: rgba(255, 255, 255, 1) !important;
-}
-ul.navbar-nav a:hover {
-  color: orangered !important;
-}
-</style>

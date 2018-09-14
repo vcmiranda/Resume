@@ -14,7 +14,7 @@
         <v-flex xs6 class="text-xs-center mx-auto visible py-2">
           <v-divider dark class="line"></v-divider>
         </v-flex>
-        <v-flex xs6 class="text-xs-center mx-auto visible py-2">
+        <v-flex xs6 class="text-xs-center mx-auto visible py-2" v-observe-visibility="visibilityButton">
           <v-icon
               v-for="icon in icons"
               size="36"
@@ -75,6 +75,9 @@ export default {
     },
     hoverOutIconColor(service) {
       this.icons[this.icons.findIndex(icon => icon.service === service)].color = 'white';
+    },
+    visibilityButton(isVisible) {
+      this.$emit('visible', isVisible);
     },
   },
 };
