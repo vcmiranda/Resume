@@ -32,7 +32,7 @@
         fab
         class="visible scrollBtn"
         :color="btnColor"
-        v-scroll-to="'#about'"
+        v-scroll-to="{el: '#about', offset: -64}"
         @mouseover="btnColor = 'accent'"
         @mouseout="btnColor = 'white'"
     >
