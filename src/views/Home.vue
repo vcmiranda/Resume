@@ -7,7 +7,7 @@
       <v-flex xs12 v-observe-visibility="visibilityToolbar"></v-flex>
       <v-flex xs12>
         <Banner style="height: 100vh;" class="m-0" id="banner" @visible="visibilityButton"></Banner>
-        <About style="height: 100vh;" class="ma-0 py-5 primary" id="about"></About>
+        <About style="height: 60vh;" class="ma-0 primary" id="about"></About>
         <Resume style="height: 100vh;" class="ma-0 py-5 error" id="resume"></Resume>
         <Contact style="height: 100vh;" class="ma-0 py-5 primary" id="contact"></Contact>
         <v-fab-transition>
@@ -16,7 +16,7 @@
             fixed
             bottom
             right
-            v-if="!visibleButton"
+            v-show="!visibleButton"
             :color="btnColor"
             v-scroll-to="'#banner'"
             @mouseover="btnColor = 'white'"
@@ -48,7 +48,7 @@ export default {
   },
   data: () => ({
     visibleToolbar: true,
-    visibleButton: false,
+    visibleButton: true,
     btnColor: 'accent',
   }),
   methods: {
