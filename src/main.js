@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueScrollTo from 'vue-scrollto';
 import VueObserveVisibility from 'vue-observe-visibility';
 import '@babel/polyfill';
+import './plugins/axios';
 import './plugins/vuetify';
 
 import App from './App.vue';

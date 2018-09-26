@@ -8,8 +8,8 @@
       <v-flex xs12>
         <Banner style="height: 100vh;" class="m-0" id="banner" @visible="visibilityButton"></Banner>
         <About style="height: 60vh;" class="ma-0 primary" id="about"></About>
-        <Resume style="height: 100vh;" class="ma-0 py-5 error" id="resume"></Resume>
-        <Contact style="height: 100vh;" class="ma-0 py-5 primary" id="contact"></Contact>
+        <Resume class="ma-0 py-5 error fullWindow" id="resume"></Resume>
+        <Contact class="ma-0 py-5 primary fullWindow" id="contact"></Contact>
         <v-fab-transition>
           <v-btn
             fab
@@ -61,3 +61,9 @@ export default {
   },
 };
 </script>
+
+<style lang="less">
+.fullWindow{
+  height: calc(~"100vh - 64px");
+}
+</style>

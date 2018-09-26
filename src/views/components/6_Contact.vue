@@ -3,7 +3,7 @@
     <v-layout wrap row class="mx-auto" style="max-width: 1200px;">
       <v-flex xs12 class="">
           <v-avatar tile size="128">
-          <img src="~@/assets/img/letter.png" alt="avatar">
+          <img src="@/assets/img/letter.png" alt="avatar">
         </v-avatar>
       </v-flex>
       <v-flex xs12 sm8>
@@ -43,6 +43,21 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <v-snackbar
+      :value="snackbar.visible"
+      :color="snackbar.color"
+      bottom
+      :multi-line="snackbar.multiline"
+      :timeout="snackbar.timeout"
+    >
+      {{ snackbar.message }}
+      <v-btn
+        flat
+        @click="SET_SNACKBAR_VISIBLE(false)"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -60,6 +75,7 @@ export default {
       'email',
       'subject',
       'message',
+      'snackbar',
     ]),
   },
   methods: {
@@ -68,6 +84,7 @@ export default {
       'SET_EMAIL',
       'SET_SUBJECT',
       'SET_MESSAGE',
+      'SET_SNACKBAR_VISIBLE',
     ]),
     ...mapActions('app', [
       'SEND_EMAIL',
