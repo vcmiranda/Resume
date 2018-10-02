@@ -6,8 +6,6 @@
         <v-btn flat v-scroll-to="'#banner'" :ripple="false" class="white--text customBtn">Home</v-btn>
         <v-btn flat v-scroll-to="{el: '#about', offset: -64}" :ripple="false" class="white--text customBtn">About</v-btn>
         <v-btn flat v-scroll-to="{el: '#resume', offset: -64}" :ripple="false" class="white--text customBtn">Resume</v-btn>
-        <v-btn flat :ripple="false" class="white--text customBtn">Works</v-btn>
-        <v-btn flat :ripple="false" class="white--text customBtn">Testimonials</v-btn>
         <v-btn flat v-scroll-to="{el: '#contact', offset: -64}" :ripple="false" class="white--text customBtn">Contact</v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>

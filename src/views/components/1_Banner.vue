@@ -1,20 +1,20 @@
 <template>
   <v-container fluid fill-height class="ma-0 pa-0">
     <v-img :src="getImg('img/background/banner.jpg')" class="customImage"></v-img>
-    <v-layout row wrap class="align-center mx-auto align-content-center" style="max-width: 1200px;">
+    <v-layout row wrap class="align-center align-content-center">
       <v-flex xs12 class="visible">
-        <v-flex xs8 class="text-xs-center mx-auto visible py-2">
-          <span class="white--text display-4 font-weight-medium">{{name}}</span>
+        <v-flex xs10 sm8 md7 class="text-xs-center mx-auto visible py-2">
+          <span :class="className">{{name}}</span>
         </v-flex>
-        <v-flex xs8 class="text-xs-center mx-auto visible py-2">
-          <span class="white--text headline font-weight-regular">{{description}}</span>
+        <v-flex xs10 sm8 md7 class="text-xs-center mx-auto visible py-2">
+          <span :class="classDesc">{{description}}</span>
         </v-flex>
       </v-flex>
       <v-flex xs12 class="visible">
-        <v-flex xs6 class="text-xs-center mx-auto visible py-2">
+        <v-flex xs10 sm8 md7 class="text-xs-center mx-auto visible py-2">
           <v-divider dark class="line"></v-divider>
         </v-flex>
-        <v-flex xs6 class="text-xs-center mx-auto visible py-2" v-observe-visibility="visibilityButton">
+        <v-flex xs10 sm8 md6 class="text-xs-center mx-auto visible py-2">
           <v-icon
               v-for="icon in icons"
               size="36"
@@ -38,6 +38,7 @@
     >
       <v-icon color="black">keyboard_arrow_down</v-icon>
     </v-btn>
+    <span class="showBtn" v-observe-visibility="visibilityButton"></span>
   </v-container>
 </template>
 
@@ -59,6 +60,22 @@ export default {
     ],
     btnColor: 'white',
   }),
+  computed: {
+    className() {
+      return {
+        'white--text display-4 font-weight-medium': this.$vuetify.breakpoint.lgAndUp,
+        'white--text display-3 font-weight-medium': this.$vuetify.breakpoint.smAndUp && this.$vuetify.breakpoint.mdAndDown,
+        'white--text display-1 font-weight-medium': this.$vuetify.breakpoint.xsOnly,
+      };
+    },
+    classDesc() {
+      return {
+        'white--text headline font-weight-regular': this.$vuetify.breakpoint.lgAndUp,
+        'white--text title font-weight-regular': this.$vuetify.breakpoint.smAndUp && this.$vuetify.breakpoint.mdAndDown,
+        'white--text subheading font-weight-regular': this.$vuetify.breakpoint.xsOnly,
+      };
+    },
+  },
   methods: {
     sendToLink(link) {
       if (link) {
@@ -101,5 +118,12 @@ export default {
   top: 95vh;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+</style>
+
+<style lang="less">
+.showBtn{
+  position: absolute;
+  top: calc(~"95vh - 64px");
 }
 </style>
