@@ -2,7 +2,7 @@ module.exports = {
   '2_about': {
     about: {
       title: 'About Me',
-      description: 'Hard-working full stack web developer with a flair for developing structured APIs and creating elegant solutions in the least amount of time. Developing a sports event management app, and a sport event website. Solid project management background, being responsible or having participated of the deployment of solutions in a variety of domains. Provided in-company training to more than 1000 people in project management software. Responsible for the growth and mentoring of other team members (developing intern technical and management skills).',
+      description: 'Hard-working Web Developer specialized in JavaScript having professional experience working with AngularJS, React, and Vue, with a flair for developing structured APIs and creating elegant websites and web applications in the least amount of time. Solid project management background, being responsible or having participated of the deployment of solutions in a variety of domains. Provided in-company training to more than 1000 people in project management software. Responsible for growth and mentoring of other team members (developing intern technical and management skills).',
     },
     contact: {
       title: 'Contact Details',
@@ -18,11 +18,27 @@ module.exports = {
       title: 'Experience',
       items: [
         {
-          id: 1,
+          id: 7,
+          company: 'binnj inc.',
+          position: 'Web Developer',
+          location: 'London, ON',
+          dates: 'Jan 2019 / Current',
+          description: [
+            'Develop and improve web applications using AngularJS and its ecosystem.',
+            'Design and develop Single Page Applications (SPA) using React, React-Router and Redux from scratch.',
+            'Develop Electron app using React.',
+            'Implement responsive web UI and improve UX using SASS and Bootstrap.',
+            'Consume REST web service to get needed data.',
+            'Create web maps using Google Maps and Google APIs',
+            'Manage source code using Git and Gitlab.',
+          ],
+        },
+        {
+          id: 6,
           company: 'Sport-Travel',
           position: 'Full Stack Web Developer',
           location: 'London, ON',
-          dates: 'May 2017 / Current',
+          dates: 'May 2017 / Dec 2018',
           description: [
             'Create a RESTful API endpoints using NodeJS and ExpressJS',
             'Develop a web/mobile app to consume the API using VueJS/HTML5/CSS',
@@ -35,7 +51,7 @@ module.exports = {
           ],
         },
         {
-          id: 2,
+          id: 5,
           company: 'Fanshawe College',
           position: 'Peer Tutor',
           location: 'London, ON',
@@ -45,7 +61,7 @@ module.exports = {
           ],
         },
         {
-          id: 3,
+          id: 4,
           company: 'Prosperi Tecnology',
           position: 'Project Management Consultant/Instructor',
           location: 'Vitoria, BR',
@@ -58,7 +74,7 @@ module.exports = {
           ],
         },
         {
-          id: 4,
+          id: 3,
           company: 'UCL – Centro Leste College',
           position: 'College Professor',
           location: 'Serra, BR',
@@ -70,7 +86,7 @@ module.exports = {
           ],
         },
         {
-          id: 5,
+          id: 2,
           company: 'Microsoft Innovation Center',
           position: 'Coordinator',
           location: 'Vitoria, BR',
@@ -82,7 +98,7 @@ module.exports = {
           ],
         },
         {
-          id: 6,
+          id: 1,
           company: 'Concremat Engineering and Technology Inc',
           position: 'Planning and PMO Analyst',
           location: 'Vitoria, BR',
@@ -134,7 +150,7 @@ module.exports = {
         },
         {
           id: 2,
-          name: 'Front end framework - Vue.js (Vuex, Vue-router, Vuetify)',
+          name: 'Front end framework - AngularJS, React, Vue.js',
           level: 90,
         },
         {
@@ -144,33 +160,38 @@ module.exports = {
         },
         {
           id: 4,
-          name: 'Database - MySQL, MSSQL, Oracle',
+          name: 'Database - PostgreSQL, MySQL, MSSQL, Oracle',
           level: 85,
         },
         {
           id: 5,
+          name: 'Tools - Gulp, JSON, Webpack, REST',
+          level: 80,
+        },
+        {
+          id: 6,
           name: 'Design Tools - Adobe Photoshop, Adobe Illustrator',
           level: 65,
         },
         {
-          id: 6,
+          id: 7,
+          name: 'Software Version Control - Git, Github, Gitlab',
+          level: 85,
+        },
+        {
+          id: 8,
           name: 'Server - Linux, Windows',
           level: 85,
         },
         {
-          id: 7,
+          id: 9,
           name: 'Web Hosting Solutions - Google Cloud, Microsoft Azure',
           level: 75,
         },
         {
-          id: 8,
-          name: 'Development Tools - Gulp, JSON, Webpack',
-          level: 75,
-        },
-        {
-          id: 9,
-          name: 'Software Version Control - Git, Github',
-          level: 85,
+          id: 10,
+          name: 'Microsoft Project Management - MS Project, MS Project Online, MS Project Server',
+          level: 90,
         },
       ],
     },
