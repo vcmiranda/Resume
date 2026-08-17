@@ -1,46 +1,23 @@
 {
-  "name": "personalresume",
-  "version": "0.1.0",
+  "name": "vcmiranda-me",
   "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+  "type": "module",
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=22"
   },
-  "dependencies": {
-    "@babel/polyfill": "^7.0.0",
-    "@fortawesome/fontawesome-free": "^5.3.1",
-    "@mdi/font": "^2.7.94",
-    "axios": "^0.18.0",
-    "lodash": "^4.17.11",
-    "moment": "^2.22.2",
-    "vue": "^2.5.17",
-    "vue-observe-visibility": "^0.4.1",
-    "vue-router": "^3.0.1",
-    "vue-scrollto": "^2.13.0",
-    "vuetify": "^1.2.3",
-    "vuex": "^3.0.1"
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "test:e2e": "turbo run test:e2e",
+    "preview": "pnpm --filter @vcm/web preview",
+    "verify": "turbo run typecheck test build",
+    "clean": "turbo run clean && rm -rf node_modules"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.3",
-    "@vue/cli-plugin-eslint": "^3.0.3",
-    "@vue/cli-plugin-unit-mocha": "^3.0.3",
-    "@vue/cli-service": "^3.0.3",
-    "@vue/eslint-config-airbnb": "^3.0.3",
-    "@vue/test-utils": "^1.0.0-beta.25",
-    "axios": "^0.18.0",
-    "chai": "^4.1.2",
-    "json-loader": "^0.5.7",
-    "less": "^3.8.1",
-    "less-loader": "^4.1.0",
-    "node-sass": "^4.9.3",
-    "sass-loader": "^7.1.0",
-    "save-dev": "^2.0.0",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2",
-    "vue-cli-plugin-axios": "0.0.4",
-    "vue-cli-plugin-vuetify": "^0.1.6",
-    "vue-template-compiler": "^2.5.17"
+    "turbo": "^2.5.8",
+    "typescript": "^7.0.2"
   }
 }
