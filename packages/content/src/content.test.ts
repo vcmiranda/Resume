@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { allProjects, featuredProjects, getProject, projects } from './projects'
 import { caseStudies, getCaseStudy } from './case-studies'
+import { home } from './home'
 import { site } from './site'
 
 describe('projects', () => {
@@ -69,7 +70,7 @@ describe('site content', () => {
       'pixel-perfect',
       'awesome',
     ]
-    const corpus = JSON.stringify(site).toLowerCase()
+    const corpus = JSON.stringify({ site, home }).toLowerCase()
     for (const phrase of banned) {
       expect(corpus, phrase).not.toContain(phrase)
     }

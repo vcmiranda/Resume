@@ -1,5 +1,6 @@
 export { site, type Site } from './site'
 export { nav } from './nav'
+export { home, type Home } from './home'
 export {
   projects,
   allProjects,
