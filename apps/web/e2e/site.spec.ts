@@ -15,11 +15,11 @@ test.describe('accessibility', () => {
   }
 })
 
-test('primary CTA reaches the work index', async ({ page }) => {
+test('primary CTA reaches the work section', async ({ page }) => {
   await page.goto('/')
   await page.getByRole('link', { name: 'View my work' }).click()
-  await expect(page).toHaveURL('/work')
-  await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+  await expect(page).toHaveURL(/#work$/)
+  await expect(page.getByRole('heading', { name: 'Selected work' })).toBeVisible()
 })
 
 test('a project card opens its case study', async ({ page }) => {
