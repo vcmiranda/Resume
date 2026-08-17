@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+
+/* Tailwind v4 scans the importing project by default; the design-system package
+   lives outside it, so its class usage has to be declared explicitly. */
+@source '../../../../packages/ui/src';
+
+@import '@fontsource-variable/inter';
+@import '@fontsource/instrument-serif/400.css';
+@import '@fontsource/instrument-serif/400-italic.css';
+
+@import '@vcm/ui/tokens.css';

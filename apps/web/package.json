@@ -1,0 +1,52 @@
+{
+  "name": "@vcm/web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build:client": "vite build --outDir dist",
+    "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
+    "prerender": "node --experimental-strip-types scripts/prerender.ts",
+    "build": "pnpm run build:client && pnpm run build:server && pnpm run prerender",
+    "preview": "vite preview --port 4173 --outDir dist",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "clean": "rm -rf dist .turbo coverage playwright-report test-results"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.9.0",
+    "@tanstack/react-query": "^5.101.4",
+    "lucide-react": "^1.31.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-hook-form": "^7.85.0",
+    "react-router": "^7.18.2",
+    "zod": "^4.4.3",
+    "@vcm/content": "workspace:*",
+    "@vcm/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource/instrument-serif": "^5.3.0",
+    "@playwright/test": "^1.62.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.4",
+    "@types/node": "^26.2.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "@vitest/coverage-v8": "^4.1.10",
+    "jsdom": "^30.0.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.1",
+    "vitest": "^4.1.10",
+    "@vcm/tsconfig": "workspace:*"
+  }
+}
