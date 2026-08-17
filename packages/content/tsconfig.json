@@ -1,0 +1,4 @@
+{
+  "extends": "@vcm/tsconfig/base.json",
+  "include": ["src"]
+}
