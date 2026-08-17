@@ -1,54 +1,57 @@
 /* ---------------------------------------------------------------------------
    @vcm/ui design tokens.
-   Editorial minimal: near-monochrome, one accent, two families.
-   Every value here is on a scale — nothing arbitrary.
+   Industrial wireframe: steel-blue on a light technical ground, Barlow
+   Condensed headings over Barlow, square corners, hairline rules and
+   registration marks. Every value here is on a scale — nothing arbitrary.
    Imported by the consuming app's stylesheet after `@import 'tailwindcss'`.
 --------------------------------------------------------------------------- */
 
 @theme {
-  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-display: 'Instrument Serif', ui-serif, Georgia, serif;
+  --font-sans: 'Barlow', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: 'Barlow Condensed', 'Barlow', ui-sans-serif, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
 
   /* Modular type scale — nothing outside it */
-  --text-2xs: 0.75rem;
+  --text-2xs: 0.6875rem;
   --text-xs: 0.8125rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.375rem;
-  --text-2xl: 1.75rem;
-  --text-3xl: 2.25rem;
-  --text-4xl: 3.5rem;
+  --text-lg: 1.1875rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.9375rem;
+  --text-3xl: 2.75rem;
+  --text-4xl: 4.25rem;
 
-  /* 8px spacing scale */
-  --spacing-section: 6rem;
-  --spacing-section-lg: 8rem;
+  --spacing-section: 4.5rem;
+  --spacing-section-lg: 5.5rem;
 
-  --radius-card: 0.625rem;
+  /* Square by intent: this system draws objects, it does not soften them */
+  --radius-card: 0px;
 
-  --ease-entrance: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-entrance: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 @layer base {
   :root {
-    --bg: #fcfcfc;
-    --surface: #f4f4f5;
-    --text: #16181d;
-    --muted: #5b616b;
-    --border: #e4e4e7;
-    --accent: #2c5ff6;
+    --bg: #f2f2f3;
+    --surface: #e8e9ea;
+    --text: #1d1f20;
+    --muted: #62676c;
+    --border: #d2d4d6;
+    --accent: #456585;
+    --accent-strong: #3a5a7a;
     --accent-contrast: #ffffff;
   }
 
   [data-theme='dark'] {
-    --bg: #0b0c0e;
-    --surface: #141518;
-    --text: #edeef0;
-    --muted: #9ba1ab;
-    --border: #26282d;
-    --accent: #6e97ff;
-    --accent-contrast: #06070a;
+    --bg: #1d2d3d;
+    --surface: #2c455d;
+    --text: #f2f2f3;
+    --muted: #a8bacb;
+    --border: #3a5470;
+    --accent: #94bce3;
+    --accent-strong: #b5d9fd;
+    --accent-contrast: #10202f;
   }
 
   * {
@@ -57,6 +60,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
     -webkit-text-size-adjust: 100%;
   }
 
@@ -78,18 +82,19 @@
     color: var(--text);
     font-family: var(--font-sans);
     font-size: var(--text-base);
-    line-height: 1.65;
-    letter-spacing: -0.011em;
+    line-height: 1.62;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
-  /* Tracking tightens as size increases — the single clearest typographic tell */
   h1,
   h2,
   h3,
   h4 {
-    line-height: 1.12;
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
     text-wrap: balance;
   }
 
@@ -101,21 +106,21 @@
   :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
-    border-radius: 2px;
+    border-radius: 0;
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--accent) 22%, transparent);
+    background: color-mix(in oklab, var(--accent) 24%, transparent);
   }
 }
 
 @utility container-page {
-  width: min(100% - 2.5rem, 64rem);
+  width: min(100% - 3.5rem, 74rem);
   margin-inline: auto;
 }
 
 @utility measure {
-  max-width: 34rem; /* 62–72 characters */
+  max-width: 34rem;
 }
 
 @utility text-muted {
@@ -124,26 +129,89 @@
 
 @utility display {
   font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 0.98;
 }
 
-/* Single permitted entrance: 8px rise + fade, once, never repeating */
-@media (prefers-reduced-motion: no-preference) {
-  @keyframes rise {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
+/* The condensed, letter-spaced label that marks every section and field */
+@utility eyebrow {
+  font-family: var(--font-display);
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
 
-  .animate-rise {
-    animation: rise 0.3s var(--ease-entrance) both;
+/* Wireframe frame: square, hairline, registration marks at the corners.
+   Rendered by the <Blueprint> component so the marks are never forgotten. */
+.blueprint {
+  position: relative;
+}
+.blueprint > .corner {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  color: var(--accent);
+  pointer-events: none;
+}
+.blueprint > .corner::before,
+.blueprint > .corner::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+}
+.blueprint > .corner::before {
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  transform: translateY(-50%);
+}
+.blueprint > .corner::after {
+  top: 0;
+  left: 50%;
+  height: 100%;
+  width: 1px;
+  transform: translateX(-50%);
+}
+.blueprint > .corner.tl {
+  left: -4px;
+  top: -4px;
+}
+.blueprint > .corner.tr {
+  right: -4px;
+  top: -4px;
+}
+.blueprint > .corner.bl {
+  left: -4px;
+  bottom: -4px;
+}
+.blueprint > .corner.br {
+  right: -4px;
+  bottom: -4px;
+}
+
+/* Photographs are screen-printed into the accent, never shown untreated */
+.duotone {
+  position: relative;
+  background: var(--accent);
+}
+.duotone img {
+  filter: grayscale(1) contrast(1.05);
+  mix-blend-mode: luminosity;
+}
+
+/* Scroll entrance. Opacity stays at 1 so axe and no-JS readers always see
+   full contrast; only position animates. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    transform: translateY(16px);
+    transition: transform 0.7s var(--ease-entrance);
+  }
+  .reveal.is-visible {
+    transform: none;
   }
 }
 
@@ -156,24 +224,32 @@
 }
 .prose-editorial h2 {
   font-size: var(--text-xl);
-  font-weight: 600;
   margin-top: 3rem;
-  letter-spacing: -0.015em;
 }
 .prose-editorial h3 {
   font-size: var(--text-lg);
-  font-weight: 600;
   margin-top: 2rem;
 }
 .prose-editorial ul {
-  list-style: disc;
-  padding-left: 1.25rem;
+  list-style: none;
+  padding-left: 0;
+}
+.prose-editorial li {
+  padding-left: 1.5rem;
+  position: relative;
+}
+.prose-editorial li::before {
+  content: '+';
+  position: absolute;
+  left: 0;
+  font-family: var(--font-display);
+  color: var(--accent);
 }
 .prose-editorial li + li {
   margin-top: 0.5rem;
 }
 .prose-editorial a {
-  color: var(--accent);
+  color: var(--accent-strong);
   text-underline-offset: 3px;
   text-decoration-line: underline;
 }
@@ -182,7 +258,6 @@
   font-size: 0.875em;
   background: var(--surface);
   padding: 0.1em 0.35em;
-  border-radius: 4px;
 }
 .prose-editorial strong {
   font-weight: 600;
