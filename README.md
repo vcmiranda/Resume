@@ -1,163 +1,70 @@
-# vcmiranda.me
+# Portfolio redesign — handoff
 
-Personal site for Vitor Miranda — senior frontend engineer, London, Ontario.
+The Industry-style redesign, written in the stack the repo already uses:
+React 19 + react-router, Tailwind v4, \`@vcm/ui\` tokens, \`@vcm/content\` copy.
+Nothing new was introduced except two font packages.
 
-pnpm workspace monorepo. React + TypeScript + Vite, prerendered to static HTML,
-deployed on Vercel. One serverless function handles the contact form; there is no
-other backend.
+## Drop these files in
 
-```
-.
-├── apps/
-│   └── web/                  @vcm/web — the site
-│       ├── api/contact.ts    Vercel Edge function (the only server-side code)
-│       ├── e2e/              Playwright + axe
-│       ├── scripts/          prerender → static HTML, sitemap, robots
-│       └── src/
-├── packages/
-│   ├── ui/                   @vcm/ui — design system: primitives + tokens
-│   ├── content/              @vcm/content — typed content layer
-│   └── tsconfig/             @vcm/tsconfig — shared compiler config
-├── pnpm-workspace.yaml
-└── turbo.json
-```
+Paths mirror the repo root, so copying the tree over the repo is enough:
 
-## Why a monorepo for a personal site
+    apps/web/package.json                              (font deps swapped)
+    apps/web/public/vitor-miranda.png                  (new — hero portrait)
+    apps/web/src/styles/globals.css                    (font imports)
+    apps/web/src/pages/Home.tsx                        (rewritten — the one-pager)
+    apps/web/src/components/layout/Header.tsx           (sticky anchor nav)
+    apps/web/src/components/layout/Footer.tsx           (condensed)
+    apps/web/src/components/layout/Blueprint.tsx        (new)
+    apps/web/src/components/layout/Reveal.tsx           (new)
+    packages/ui/src/styles/tokens.css                  (retheme)
+    packages/content/src/home.ts                       (new)
+    packages/content/src/index.ts                      (exports home)
+    packages/content/src/nav.ts                        (anchor nav)
 
-Three packages, each with a reason to exist independently of the app:
+Then:
 
-**`@vcm/ui`** is a design system, not a components folder. It owns the design
-tokens (`tokens.css`), the primitives built on Radix, and the `cn` helper. It
-declares its own dependencies and type-checks on its own. The app consumes it
-like any other consumer would — which is the point: the boundary is enforced by
-the package manager rather than by convention.
+    pnpm install     # picks up @fontsource/barlow + barlow-condensed
+    pnpm dev
+    pnpm typecheck && pnpm test
 
-**`@vcm/content`** holds every user-facing string as typed data with its own test
-suite asserting content invariants (unique slugs, matching case studies,
-consistent narrative section order, no banned marketing phrases). Content is
-data, and data deserves a type and a test.
+## What changed, and why
 
-**`@vcm/tsconfig`** is the standard shared-config pattern. `base.json` for
-libraries, `react.json` for anything with JSX.
+**Theme.** \`tokens.css\` keeps its shape — same variable names, same layers — but
+carries the Industry values: ground \`#f2f2f3\`, text \`#1d1f20\`, one steel accent
+\`#5980a6\`, Barlow Condensed headings over Barlow, \`--radius-card: 0\`. Dark mode
+is the deep steel pair. Because every component styles against \`var(--*)\`, the
+existing pages (\`/work\`, \`/about\`, \`/resume\`, case studies) retheme for free.
 
-Packages are consumed as TypeScript source — no build step, no `dist/` to stale.
-Vite transpiles them as part of the app build, and `tsc` checks each in place.
+New in the same file: \`.eyebrow\` (the condensed section label), \`.blueprint\` +
+\`.corner\` (registration marks), \`.duotone\` (photographs printed into the
+accent), \`.reveal\` (scroll entrance). Instrument Serif and Inter are gone.
 
-The honest caveat: a six-page site does not *need* this. The structure earns its
-place by making the design-system boundary real and by keeping content out of
-components, both of which stay useful as the site grows. If you would rather have
-one package, the whole thing collapses back into `apps/web` in about ten minutes.
+**Colour.** Steel stays the primary accent; a copper second accent
+(\`--accent-2\`) carries the counting elements only — section indices, card
+numbers, dates, the "+" markers, principle titles and the secondary button.
+The Notes section keeps the page ground (\`--field: transparent\`), framed as a
+blueprint object —
+and the stack list uses tinted \`.chip\` instead of grey. Two accents, no more.
 
-## Commands
+**Home** is now the whole site: hero + spec panel, selected work, experience
+ledger, stack, notes, about, contact. Copy comes from \`content/home.ts\`;
+experience rows read \`resume.roles\` and the cards read \`featuredProjects\`, so
+nothing is duplicated. The contact panel reuses \`ContactFormLazy\` — the real
+form, still posting to \`/api/contact\`.
 
-Run from the repository root:
+**Nav** points at anchors on \`/\` (\`/#work\`, \`/#experience\`, …). The standalone
+routes still exist and are still prerendered; the case-study links on the work
+cards and notes go to them. \`Header\` no longer uses \`NavLink\` (anchors have no
+active state), so \`cn\` is no longer imported there.
 
-```bash
-pnpm install
-pnpm dev              # Vite dev server
-pnpm build            # client → SSR → prerender, in dependency order
-pnpm typecheck        # all four packages
-pnpm test             # Vitest across the workspace
-pnpm test:e2e         # Playwright (builds first)
-pnpm verify           # typecheck + test + build
-pnpm preview          # serve the built site on :4173
-```
+## Two things to check before pushing
 
-Turborepo orchestrates the tasks and caches by input hash — an unchanged build
-replays in well under a second. Scope a single package with
-`pnpm --filter @vcm/web <script>`.
+1. \`e2e/site.spec.ts\` asserts against the old header nav labels and the old
+   home layout — expect a couple of failures there, and update the selectors.
+2. \`site.resumePath\` drives both résumé buttons; the PDF is already in
+   \`apps/web/public/\`. Rename the portrait if you prefer a hashed asset.
 
-## The prerender step
+## Design source
 
-`apps/web/scripts/prerender.ts` runs after the client and SSR builds. It walks
-the `pages` array in `src/routes.tsx`, renders each route with `renderToString`,
-injects that route's `<head>`, and writes a static HTML file — then emits
-`sitemap.xml` and `robots.txt` from the same array, so the three cannot drift.
-
-Every route ships as real HTML. Content is readable and indexable with
-JavaScript disabled, which an e2e test asserts.
-
-## Where to edit content
-
-**Every user-facing string lives in `packages/content/src/`.** No copy is
-hard-coded in a component; this is an architectural constraint, not a preference.
-
-| File | Holds |
-|---|---|
-| `site.ts` | name, positioning, hero, CTAs, contact copy, footer |
-| `nav.ts` | header links |
-| `projects.ts` | project metadata and per-page SEO |
-| `case-studies.ts` | case-study bodies as typed blocks |
-| `about.ts` | bio, working principles, current stack |
-| `resume.ts` | the HTML résumé at `/resume` |
-
-### Unfinished case-study sections
-
-`case-studies.ts` supports a `todo` block:
-
-```ts
-{ type: 'todo', text: 'How many microfrontends? One number makes this concrete.' }
-```
-
-These render as amber callouts in `pnpm dev` and are **stripped from production
-builds**, so a half-written case study cannot ship with placeholder text visible.
-Search for `type: 'todo'` to see what still needs your input.
-
-## Contact form
-
-`apps/web/api/contact.ts` — a Vercel Edge function. Validates with the same Zod
-schema the form uses, drops honeypot submissions, rate-limits to 3 requests per
-minute per IP, delivers through Resend. Nothing is stored.
-
-```
-RESEND_API_KEY=re_...
-CONTACT_TO=you@example.com
-CONTACT_FROM=site@vcmiranda.me   # a domain verified in Resend
-```
-
-Without them the endpoint returns 500 and the form shows its error state, which
-points people at the email address. That address is always visible above the
-form, so contact never depends on JavaScript or on mail configuration.
-
-## Deploying
-
-Set the Vercel project's **root directory to `apps/web`**. `apps/web/vercel.json`
-handles the rest — it installs and builds from the workspace root so the
-workspace packages resolve, then serves `apps/web/dist`.
-
-```bash
-pnpm dlx vercel        # preview
-pnpm dlx vercel --prod # production
-```
-
-Point `vcmiranda.me` at the project and pick one canonical host — redirect the
-other, so search ranking is not split between apex and `www`.
-
-## Accessibility and performance
-
-Enforced by tests, not aspiration:
-
-- Zero axe violations (WCAG 2.1 A/AA) on all six routes, desktop and mobile
-- Full keyboard traversal with a visible 2px focus ring at every stop
-- Semantic landmarks, one `<h1>` per page, skip link, `prefers-reduced-motion` honoured
-- Content present and readable with JavaScript disabled
-- 107 KB gzipped initial JavaScript; React Hook Form, Zod and the resolver are
-  split into a chunk that loads only when the contact form mounts
-
-### Known trade-off
-
-A client-hydrated React SPA has a floor of roughly 100 KB gzipped once React, the
-router and TanStack Query are in. Because every route is prerendered this does
-not affect LCP — text paints before the bundle arrives — but it is real
-hydration cost. Dropping TanStack Query, or moving to a framework with server
-components, is the next lever if that budget needs to come down.
-
-## Before this goes live
-
-- [ ] Resolve every `type: 'todo'` block in `packages/content/src/case-studies.ts`
-- [ ] Add Nami screenshots, and measure its cold start, memory and binary size
-- [ ] Decide whether `nesto` is cleared to feature publicly; add or omit accordingly
-- [ ] Set the Resend environment variables in Vercel
-- [ ] Set the Vercel root directory to `apps/web`
-- [ ] Confirm `apps/web/public/Vitor_Miranda_Software_Engineer_Resume.pdf` is current
-- [ ] Point the domain, choose a canonical host, redirect the other
+\`Portfolio.dc.html\` in the design project is the reference. If we change the
+design again, the port touches the same files listed above.

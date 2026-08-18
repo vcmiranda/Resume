@@ -19,7 +19,7 @@ export function Header() {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="font-display text-xs tracking-[0.13em] uppercase text-muted transition-colors duration-150 hover:text-[var(--accent)]"
+                  className="font-display text-xs tracking-[0.13em] uppercase text-[var(--text)]/70 transition-colors duration-150 hover:text-[var(--accent)]"
                 >
                   {item.label}
                 </a>

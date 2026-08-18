@@ -36,11 +36,18 @@
     --bg: #f2f2f3;
     --surface: #e8e9ea;
     --text: #1d1f20;
-    --muted: #62676c;
+    --muted: #6b7075;
     --border: #d2d4d6;
-    --accent: #456585;
-    --accent-strong: #3a5a7a;
+    --accent: #5980a6;
+    --accent-strong: #3f6285;
     --accent-contrast: #ffffff;
+    /* Second accent: copper. Numbers, dates and the "+" markers only —
+       it labels and counts, it never fills. */
+    --accent-2: #b4674a;
+    --accent-2-strong: #8f4e35;
+    /* The one solid field in the system: steel ground, type reversed. */
+    --field: transparent;
+    --field-text: #1d1f20;
   }
 
   [data-theme='dark'] {
@@ -52,6 +59,10 @@
     --accent: #94bce3;
     --accent-strong: #b5d9fd;
     --accent-contrast: #10202f;
+    --accent-2: #e09a76;
+    --accent-2-strong: #f0b795;
+    --field: transparent;
+    --field-text: #f2f2f3;
   }
 
   * {
@@ -144,6 +155,37 @@
   color: var(--accent);
 }
 
+/* The counting label: same shape as .eyebrow, copper instead of steel */
+@utility eyebrow-2 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+}
+
+/* Tinted chip for the stack list */
+@utility chip {
+  font-family: var(--font-display);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.1875rem 0.5rem;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  color: var(--accent-strong);
+}
+
+/* Steel plate: the deliberate solid field, type reversed to paper */
+.field-plate {
+  background: var(--field);
+  color: var(--field-text);
+}
+.field-plate .rule-invert {
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
 /* Wireframe frame: square, hairline, registration marks at the corners.
    Rendered by the <Blueprint> component so the marks are never forgotten. */
 .blueprint {
@@ -203,14 +245,18 @@
   mix-blend-mode: luminosity;
 }
 
-/* Scroll entrance. Opacity stays at 1 so axe and no-JS readers always see
-   full contrast; only position animates. */
+/* Scroll entrance. The class is added on mount, so prerendered HTML is
+   readable with JavaScript disabled. */
 @media (prefers-reduced-motion: no-preference) {
   .reveal {
+    opacity: 0;
     transform: translateY(16px);
-    transition: transform 0.7s var(--ease-entrance);
+    transition:
+      opacity 0.7s var(--ease-entrance),
+      transform 0.7s var(--ease-entrance);
   }
   .reveal.is-visible {
+    opacity: 1;
     transform: none;
   }
 }

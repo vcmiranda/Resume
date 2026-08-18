@@ -24,7 +24,7 @@ function SectionHeading({
       <h2 id={id} className="text-2xl sm:text-3xl">
         {children}
       </h2>
-      <span className="eyebrow">
+      <span className="eyebrow-2">
         {index} / {label}
       </span>
     </Reveal>
@@ -56,7 +56,12 @@ export function Home() {
                   View my work
                 </a>
               </Button>
-              <Button asChild variant="outline" size="lg">
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="border-[color-mix(in_srgb,var(--accent-2)_55%,transparent)] text-[var(--accent-2-strong)]"
+              >
                 <a href={site.resumePath} download>
                   Download résumé
                 </a>
@@ -115,11 +120,12 @@ export function Home() {
             {featuredProjects.map((project, i) => (
               <Reveal
                 key={project.slug}
+                as="article"
                 className="blueprint flex flex-col gap-3.5 border border-[var(--border)] px-5 pt-6 pb-5"
               >
                 <Blueprint />
                 <div className="flex items-baseline justify-between gap-3">
-                  <span className="eyebrow">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="eyebrow-2">{String(i + 1).padStart(2, '0')}</span>
                   <span className="font-display text-xs tracking-[0.1em] uppercase text-muted">
                     {project.context}
                   </span>
@@ -181,7 +187,7 @@ export function Home() {
                 <ul className="flex flex-col gap-2">
                   {role.bullets.map((bullet) => (
                     <li key={bullet} className="grid grid-cols-[14px_1fr] gap-3 text-[var(--text)]/85">
-                      <span aria-hidden className="font-display text-[var(--accent)]">
+                      <span aria-hidden className="font-display text-[var(--accent-2)]">
                         +
                       </span>
                       <span>{bullet}</span>
@@ -213,10 +219,7 @@ export function Home() {
                 </p>
                 <ul className="flex flex-wrap gap-1.5">
                   {group.items.map((item) => (
-                    <li
-                      key={item}
-                      className="bg-[var(--surface)] px-2 py-0.5 text-2xs tracking-[0.06em] uppercase text-muted"
-                    >
+                    <li key={item} className="chip">
                       {item}
                     </li>
                   ))}
@@ -234,28 +237,31 @@ export function Home() {
             {home.notes.heading}
           </SectionHeading>
 
-          {home.notes.items.map((note) => (
-            <Reveal key={note.title}>
-              <Link
-                to={note.href}
-                className={`grid items-baseline gap-x-6 gap-y-2 ${RULE} px-0.5 py-5 text-[var(--text)] no-underline transition-colors duration-150 hover:bg-[color-mix(in_srgb,var(--accent)_8%,transparent)] sm:grid-cols-[120px_1fr_130px]`}
-              >
-                <span className="font-display text-xs tracking-[0.14em] uppercase text-[var(--accent)]">
-                  {note.date}
-                </span>
-                <span>
-                  <span className="font-display block text-lg font-semibold">{note.title}</span>
-                  <span className="mt-1.5 block max-w-[70ch] text-[var(--text)]/75">
-                    {note.blurb}
+          <div className="field-plate blueprint px-7 pt-2.5 pb-6">
+            <Blueprint />
+            {home.notes.items.map((note) => (
+              <Reveal key={note.title}>
+                <Link
+                  to={note.href}
+                  className="rule-invert grid items-baseline gap-x-6 gap-y-2 border-t px-0.5 py-5 text-[var(--field-text)] no-underline transition-colors duration-150 hover:bg-[color-mix(in_srgb,var(--accent)_10%,transparent)] sm:grid-cols-[120px_1fr_130px]"
+                >
+                  <span className="font-display text-xs tracking-[0.14em] uppercase text-[var(--accent-2-strong)]">
+                    {note.date}
                   </span>
-                </span>
-                <span className="font-display text-xs tracking-[0.14em] uppercase text-muted sm:text-right">
-                  {note.readingTime}
-                </span>
-              </Link>
-            </Reveal>
-          ))}
-          <div className={RULE} />
+                  <span>
+                    <span className="font-display block text-lg font-semibold">{note.title}</span>
+                    <span className="mt-1.5 block max-w-[70ch] text-[var(--field-text)]/75">
+                      {note.blurb}
+                    </span>
+                  </span>
+                  <span className="font-display text-xs tracking-[0.14em] uppercase text-[var(--field-text)]/55 sm:text-right">
+                    {note.readingTime}
+                  </span>
+                </Link>
+              </Reveal>
+            ))}
+            <div className="rule-invert border-t" />
+          </div>
         </Container>
       </section>
 
@@ -278,7 +284,7 @@ export function Home() {
               <p className="eyebrow mb-1.5">{home.about.principlesHeading}</p>
               {home.about.principles.map((principle) => (
                 <div key={principle.title} className={`${RULE} py-4`}>
-                  <h3 className="text-lg">{principle.title}</h3>
+                  <h3 className="text-lg text-[var(--accent-2)]">{principle.title}</h3>
                   <p className="mt-1 text-[var(--text)]/75">{principle.body}</p>
                 </div>
               ))}
@@ -298,9 +304,9 @@ export function Home() {
               </SectionHeading>
               <Reveal>
                 <p className="max-w-[52ch] text-lg text-[var(--text)]/85">{home.contact.body}</p>
-                <ul className={`mt-6 list-none p-0 ${RULE}`}>
+                <dl className={`mt-6 ${RULE}`}>
                   {home.contact.links.map((link) => (
-                    <li key={link.label} className="border-b border-[var(--border)]">
+                    <div key={link.label} className="border-b border-[var(--border)]">
                       <a
                         href={link.href}
                         className="flex items-baseline justify-between gap-4 px-0.5 py-3.5 text-[var(--text)] no-underline transition-colors duration-150 hover:text-[var(--accent-strong)]"
@@ -310,9 +316,9 @@ export function Home() {
                         </span>
                         <span>{link.value}</span>
                       </a>
-                    </li>
+                    </div>
                   ))}
-                </ul>
+                </dl>
                 <div className="mt-6">
                   <Button asChild className="blueprint">
                     <a href={site.resumePath} download>
