@@ -45,8 +45,8 @@ export const caseStudies: CaseStudy[] = [
             text: 'ASICS Apps builds Race Roster, a race-registration platform used by event organizers and athletes. As part of a platform upgrade, the system was split into separate parts, each with its own repository and deployment. The admin section became its own system.',
           },
           {
-            type: 'todo',
-            text: 'One sentence on what the admin section does for organizers — creating events, managing registrations, reporting? Keep it to what is publicly evident from the product. Also: what drove the split — release independence, team autonomy, tech debt, scaling?',
+            type: 'p',
+            text: 'The admin section is where organizers set up and run an event: building the registration form and its ticket types, managing participants and their registrations, and following how the event is filling up. Splitting it out was about release independence — its own repository and deployment meant admin could ship on its own cadence instead of waiting on the monolith, and the frontend could be rebuilt on a modern stack without a rewrite of everything around it.',
           },
         ],
       },
@@ -59,8 +59,12 @@ export const caseStudies: CaseStudy[] = [
             text: 'The admin frontend did not exist yet. There was an existing product to match in behaviour and expectation, a backend to integrate with, and no established frontend foundation in the new repository.',
           },
           {
-            type: 'todo',
-            text: 'What made this genuinely hard? Domain complexity of event management, migrating users without disruption, matching legacy behaviour, timeline? A case study with no difficulty in it reads as a chore log.',
+            type: 'p',
+            text: 'The hard part was not writing screens. The replacement had to behave like something organizers already depended on while their events were live, where a registration setting that behaves differently than before is a real cost to somebody. Much of the behaviour worth matching had accumulated in the old system over years and was never written down, so the specification was the legacy code and the product itself.',
+          },
+          {
+            type: 'p',
+            text: 'On top of that, the foundation had to be laid while feature work was already expected. Architecture decisions were made in public, with screens landing on them before they had been proven, so anything set early was expensive to reverse.',
           },
         ],
       },
@@ -73,8 +77,8 @@ export const caseStudies: CaseStudy[] = [
             text: 'I built the frontend application from scratch and owned its architecture. I selected the stack and set up the project, then developed the application and its component library as it grew.',
           },
           {
-            type: 'todo',
-            text: 'Team context: how many frontend engineers, and were you the first or only one at the start? "I was the first frontend engineer on the new repo" is a strong, specific sentence if it is true.',
+            type: 'p',
+            text: 'Everything later frontend work in that repository stands on — build tooling, data layer, component conventions, folder structure — was set here, and I stayed close to it as other engineers started contributing on top.',
           },
         ],
       },
@@ -83,8 +87,13 @@ export const caseStudies: CaseStudy[] = [
         heading: 'Constraints',
         blocks: [
           {
-            type: 'todo',
-            text: 'Pick the two or three that were real: an existing GraphQL schema shaped by the previous system; feature parity with the section being replaced; a small team, so the foundation had to be learnable by people who had not built it; timeline pressure from the wider split; existing brand and design conventions.',
+            type: 'ul',
+            items: [
+              'A GraphQL schema shaped by the previous system. The API was a contract to fit into, not something the new frontend got to design.',
+              'Feature parity with the section being replaced. The bar was not "a good admin", it was "this admin, without the regressions organizers would notice".',
+              'A foundation that had to be learnable by people who had not built it, which rules out architecture only its author can navigate.',
+              'Existing brand and design conventions, so the theme layer had to carry them rather than each screen re-deciding.',
+            ],
           },
         ],
       },
@@ -104,22 +113,35 @@ export const caseStudies: CaseStudy[] = [
           },
           { type: 'h3', text: 'Apollo GraphQL rather than REST with a fetch layer' },
           {
-            type: 'todo',
-            text: 'Was the API already GraphQL, or was that decided here? What did the normalized cache buy, and what did it cost? Be honest about the cost — every senior reader knows Apollo has one.',
+            type: 'p',
+            text: 'The API was already GraphQL, so the real decision was how much client to put on top of it. The normalized cache is what earned Apollo its place: admin screens read the same entities from several angles — an event in a list, in a header, in a detail pane — and normalization means one mutation updates all of them without hand-written invalidation. Types generated from the schema removed a whole class of drift between client and server.',
+          },
+          {
+            type: 'p',
+            text: 'The cost is real. The cache is a second source of truth with its own mental model, and its failure mode is not a crash but a stale pane after a mutation — the kind of bug that surfaces in someone else’s feature weeks later. It is also a heavy dependency for screens that fetch once and never change. Worth it for a surface this entity-dense and mutation-heavy; not a default I would carry to a read-only one.',
           },
           { type: 'h3', text: 'Material UI as the base, extended rather than replaced' },
           {
             type: 'p',
-            text: 'Building on an existing accessible component set rather than from zero, then deciding where the abstraction stopped: which components wrapped MUI, which were built independently, and how to keep consumers from reaching past that layer.',
+            text: 'Building on an existing accessible component set rather than from zero, then deciding where the abstraction stopped: which components wrapped MUI, which were built independently, and how to keep consumers from reaching past that layer. Theming carried the brand so product code never reached for a raw colour or spacing value, and the wrappers narrowed MUI’s very wide prop surface to the few variants the product actually uses — which is what stops twelve subtly different buttons from appearing.',
           },
           { type: 'h3', text: 'The component library and Storybook' },
           {
             type: 'p',
-            text: 'Storybook served as both documentation and a development environment. The interesting part is the promotion criterion — what is general enough to move into the shared library versus what stays local to a feature.',
+            text: 'Storybook served as both documentation and a development environment: components were built and reviewed in isolation, including the states that are awkward to reach in the running app — loading, empty, error, long content, permission-restricted.',
           },
           {
-            type: 'todo',
-            text: 'Application structure: feature folders, route-based splitting, a shared/domain boundary? What convention did you set, and did it hold up? Also what you chose not to test, and why.',
+            type: 'p',
+            text: 'The interesting part is the promotion criterion. Something moved into the shared library once it had a third independent consumer and no domain knowledge baked into it; anything that still had to know what an event or a registration was stayed local to its feature. Two use cases are a coincidence, and a shared component that understands the domain becomes a place where features quietly couple to each other.',
+          },
+          { type: 'h3', text: 'Application structure' },
+          {
+            type: 'p',
+            text: 'Organised by feature rather than by file type, with route-based splitting at the feature boundary and a shared layer features may import from but never the reverse. The rule that did the work was the direction of dependency: a feature can depend on shared and never on another feature, so anything two features genuinely needed either moved down into shared or was lifted into the route composing them. It held up, with one honest caveat — "shared" attracts things, and keeping it from becoming a second monolith inside the repository takes deliberate pruning.',
+          },
+          {
+            type: 'p',
+            text: 'Testing followed the same pragmatism: component behaviour and the shared library were covered first, because that is where a silent break propagates furthest. I chose not to test generated GraphQL types or thin presentational wrappers around MUI — those tests assert that a library still works, and they fail for reasons that have nothing to do with the product.',
           },
           {
             type: 'note',
@@ -133,11 +155,11 @@ export const caseStudies: CaseStudy[] = [
         blocks: [
           {
             type: 'p',
-            text: 'The application shipped and is in production, serving event organizers. The component library became the foundation the frontend work builds on.',
+            text: 'The application shipped and is in production, serving event organizers. The component library became the foundation the frontend work builds on — new features start from an existing vocabulary instead of re-deciding what a table, a form field or a dialog looks like.',
           },
           {
-            type: 'todo',
-            text: 'Add whatever you can source: number of screens or modules, time from empty repo to first production release, engineers now working in it. If you have nothing shareable, say so plainly — "I cannot share usage numbers publicly, but I am happy to talk through them" costs nothing and reads as trustworthy.',
+            type: 'p',
+            text: 'I cannot share usage numbers, timelines or team metrics publicly, but I am happy to talk through them.',
           },
         ],
       },
@@ -146,8 +168,16 @@ export const caseStudies: CaseStudy[] = [
         heading: 'Lessons and next iteration',
         blocks: [
           {
-            type: 'todo',
-            text: 'The most valuable section here and the one candidates skip. What would you decide differently now? Which decision looked risky and turned out fine, or looked safe and turned out expensive? What would you change with a free week? A senior reader trusts a case study with a real regret in it.',
+            type: 'p',
+            text: 'The decision that looked risky and turned out fine was Vite, at a point when it was still the less conservative choice for a production application. The feedback loop it bought compounded daily, and the migration risk I had budgeted for never arrived.',
+          },
+          {
+            type: 'p',
+            text: 'The one that looked safe and turned out expensive was leaning on the normalized cache as the default answer for state. It is excellent for server data, and I let it drift into places where a plain fetch or local state would have been clearer. The debugging cost of cache-shaped bugs is paid by whoever touches the feature next, not by whoever chose the pattern.',
+          },
+          {
+            type: 'p',
+            text: 'What I would decide differently: write the promotion criterion for the shared library down on day one instead of discovering it. Early components moved in because they looked reusable, and a few had to be pulled back out when a second consumer wanted slightly different behaviour. With a free week I would spend it on the seams rather than the surface — make the feature/shared boundary fail at build time instead of in review, and cover the awkward states in Storybook so they are designed rather than discovered.',
           },
         ],
       },
