@@ -53,7 +53,7 @@ export const projects: Project[] = [
     role: 'Sole designer and developer',
     stack: ['Tauri 2', 'macOS', 'Interaction design'],
     featured: true,
-    order: 3,
+    order: 2,
     confidential: false,
     repo: 'nami',
     seo: {
@@ -73,8 +73,8 @@ export const projects: Project[] = [
     context: 'Personal project',
     role: 'Sole designer and developer',
     stack: ['TypeScript'],
-    featured: false,
-    order: 4,
+    featured: true,
+    order: 3,
     confidential: false,
     repo: 'forma',
     seo: {

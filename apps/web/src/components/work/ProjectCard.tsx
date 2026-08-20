@@ -1,7 +1,7 @@
 import { Link } from 'react-router'
 import { ArrowRight } from 'lucide-react'
 import { Badge } from '@vcm/ui'
-import type { Project } from '@vcm/content'
+import { getCaseStudy, type Project } from '@vcm/content'
 import { RepoMeta } from './RepoMeta'
 
 export function ProjectCard({ project }: { project: Project }) {
@@ -33,7 +33,7 @@ export function ProjectCard({ project }: { project: Project }) {
           to={`/work/${project.slug}`}
           className="inline-flex items-center gap-1.5 pt-2 text-sm text-[var(--accent)] hover:underline"
         >
-          Read the case study
+          {getCaseStudy(project.slug) ? 'Read the case study' : 'See the project'}
           <ArrowRight aria-hidden className="size-4 transition-transform duration-150 group-hover:translate-x-0.5" />
         </Link>
       </div>

@@ -18,7 +18,7 @@ export const home = {
   },
 
   sections: {
-    work: { index: '01', label: 'Two projects' },
+    work: { index: '01', label: 'Three projects' },
     experience: { index: '02', label: 'Nine years' },
     stack: { index: '03', label: 'What I actually use' },
     notes: { index: '04', label: 'Writing' },
@@ -29,9 +29,9 @@ export const home = {
   work: {
     heading: 'Selected work',
     intro:
-      'One is from my work at ASICS Apps, described without internal specifics; one is my own. Written as decisions rather than screenshots.',
+      'One is from my work at ASICS Apps, described without internal specifics; two are my own. Written as decisions rather than screenshots.',
     footnote:
-      'Also in progress: Forma, a client-management tool for personal trainers. Too early to be a case study, honest enough to mention.',
+      'Forma is the one I am building now — too early for a case study, honest enough to show.',
   },
 
   stack: {

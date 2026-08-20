@@ -4,7 +4,7 @@ import { Container } from '@/components/layout/Container'
 import { Blueprint } from '@/components/layout/Blueprint'
 import { Reveal } from '@/components/layout/Reveal'
 import { ContactFormLazy } from '@/components/sections/ContactFormLazy'
-import { featuredProjects, home, resume, site } from '@vcm/content'
+import { featuredProjects, getCaseStudy, home, resume, site } from '@vcm/content'
 
 const RULE = 'border-t border-[var(--border)]'
 
@@ -146,7 +146,7 @@ export function Home() {
                   to={`/work/${project.slug}`}
                   className="font-display inline-flex items-center gap-2 text-xs tracking-[0.12em] uppercase text-[var(--accent-strong)] no-underline hover:underline"
                 >
-                  Read the case study
+                  {getCaseStudy(project.slug) ? 'Read the case study' : 'See the project'}
                   <span aria-hidden>→</span>
                 </Link>
               </Reveal>
