@@ -29,7 +29,7 @@ export const projects: Project[] = [
     slug: 'event-management-platform',
     title: 'Building a platform frontend from scratch',
     summary:
-      'When our event-management admin was split out of a monolith, I built its frontend from zero — choosing the stack, owning the architecture, and growing a component library alongside it.',
+      'When our internal admin was split out of a monolith, I built its frontend from zero — the structure it grew into, the component library underneath it, and the CI/CD pipeline around it.',
     context: 'ASICS Apps (Race Roster) · 2021–present',
     role: 'Frontend architecture and implementation',
     stack: ['React', 'TypeScript', 'Vite', 'Apollo GraphQL', 'Material UI', 'Storybook'],
@@ -39,9 +39,9 @@ export const projects: Project[] = [
     seo: {
       title: 'Building a platform frontend from scratch',
       description:
-        'How I built the frontend of an event-management admin platform from zero: stack selection, architecture, and the component system that grew with it.',
+        'How I built the frontend of an internal admin platform from zero: the structure, the conventions holding independently built sections together, and the component system that grew with it.',
       ogTitle: 'Building a platform frontend from scratch',
-      ogDescription: 'React, TypeScript, Vite, Apollo GraphQL — and the decisions behind each.',
+      ogDescription: 'React, TypeScript, Vite, Apollo GraphQL — and the decisions underneath them.',
     },
   },
   {

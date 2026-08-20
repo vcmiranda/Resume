@@ -46,7 +46,7 @@ export const caseStudies: CaseStudy[] = [
           },
           {
             type: 'p',
-            text: 'The admin section is where organizers set up and run an event: building the registration form and its ticket types, managing participants and their registrations, and following how the event is filling up. Splitting it out was about release independence — its own repository and deployment meant admin could ship on its own cadence instead of waiting on the monolith, and the frontend could be rebuilt on a modern stack without a rewrite of everything around it.',
+            text: 'It is an internal tool, not a customer-facing one. The admin is where our own team manages everything users create on the platform and resolves the problems they run into: supporting the organizations, their events, the financial side, and the questions that come from organizers and participants alike. When support is the product, the people using it are colleagues — which changes what "good" means. Speed and density beat polish, and a wrong answer on screen becomes a wrong answer given to a customer.',
           },
         ],
       },
@@ -56,15 +56,15 @@ export const caseStudies: CaseStudy[] = [
         blocks: [
           {
             type: 'p',
-            text: 'The admin frontend did not exist yet. There was an existing product to match in behaviour and expectation, a backend to integrate with, and no established frontend foundation in the new repository.',
+            text: 'The admin frontend did not exist yet. There was an existing product to match in behaviour and expectation, a backend to integrate with, and no established frontend foundation in the new repository. It is still in development: each area is built independently of the others, so the application grows one capability at a time rather than arriving finished.',
           },
           {
             type: 'p',
-            text: 'The hard part was not writing screens. The replacement had to behave like something organizers already depended on while their events were live, where a registration setting that behaves differently than before is a real cost to somebody. Much of the behaviour worth matching had accumulated in the old system over years and was never written down, so the specification was the legacy code and the product itself.',
+            text: 'The hard part was not writing screens. A support tool has to expose the whole platform — organizations, events, financials, participants — to people who arrive at it mid-problem, with a customer waiting. Much of the behaviour worth matching had accumulated in the old system over years and was never written down, so the specification was the legacy code and the product itself.',
           },
           {
             type: 'p',
-            text: 'On top of that, the foundation had to be laid while feature work was already expected. Architecture decisions were made in public, with screens landing on them before they had been proven, so anything set early was expensive to reverse.',
+            text: 'Building it section by section makes that harder, not easier. Each area is developed independently, so what holds the application together is convention rather than a single plan: without a shared vocabulary for tables, filters, forms and permissions, independent sections drift into feeling like separate products stitched behind one login. And the foundation had to be laid while feature work was already expected, so anything set early was expensive to reverse.',
           },
         ],
       },
@@ -74,11 +74,15 @@ export const caseStudies: CaseStudy[] = [
         blocks: [
           {
             type: 'p',
-            text: 'I built the frontend application from scratch and owned its architecture. I selected the stack and set up the project, then developed the application and its component library as it grew.',
+            text: 'I built the frontend application from the beginning and set up the project. The stack itself was largely inherited: our senior team — which I am part of — had settled it across our other projects, so the decisions made here were the ones underneath that line, about how the application is put together rather than what it is written in.',
           },
           {
             type: 'p',
-            text: 'Everything later frontend work in that repository stands on — build tooling, data layer, component conventions, folder structure — was set here, and I stayed close to it as other engineers started contributing on top.',
+            text: 'Alongside the code, I am one of the people responsible for how the interface behaves — using the available UI library as the pattern and deciding what a screen does when data is missing, slow, restricted or wrong, which in a support tool is most of the design work. I also worked with the infrastructure team to get CI/CD running on GitHub for the new repository.',
+          },
+          {
+            type: 'p',
+            text: 'What later frontend work in that repository stands on — component conventions, folder structure, the shape of the data layer, the pipeline — was set here, and I stayed close to it as other engineers started contributing on top.',
           },
         ],
       },
@@ -90,9 +94,10 @@ export const caseStudies: CaseStudy[] = [
             type: 'ul',
             items: [
               'A GraphQL schema shaped by the previous system. The API was a contract to fit into, not something the new frontend got to design.',
-              'Feature parity with the section being replaced. The bar was not "a good admin", it was "this admin, without the regressions organizers would notice".',
+              'A stack already chosen across our other projects. Consistency was the point, so this repository was not the place to relitigate it.',
+              'Sections built independently of each other, which puts the weight on shared conventions instead of a single up-front plan.',
               'A foundation that had to be learnable by people who had not built it, which rules out architecture only its author can navigate.',
-              'Existing brand and design conventions, so the theme layer had to carry them rather than each screen re-deciding.',
+              'An existing UI library and design conventions, so the pattern layer had to carry them rather than each section re-deciding.',
             ],
           },
         ],
@@ -104,17 +109,17 @@ export const caseStudies: CaseStudy[] = [
           { type: 'h3', text: 'React and TypeScript' },
           {
             type: 'p',
-            text: "The team's existing stack, so the choice was about consistency and hiring rather than novelty. Not every decision needs to be interesting.",
+            text: "Worth saying plainly: almost all of the technology here was pre-defined by our senior team, and adopting it was the right call rather than an interesting one. React and TypeScript were already the team's stack, so the value was consistency — engineers moving between our projects, and patterns that travel with them. Not every decision needs to be a decision.",
           },
-          { type: 'h3', text: 'Vite over the alternatives' },
+          { type: 'h3', text: 'Vite as the build tool' },
           {
             type: 'p',
-            text: 'For a greenfield repository where the developer feedback loop is the thing you pay for every day for years, build speed is an architecture decision, not a preference.',
+            text: 'Also inherited, and the part of the inheritance I would have chosen anyway. In a repository where the developer feedback loop is what you pay for every day for years, build speed is an architecture decision rather than a preference.',
           },
           { type: 'h3', text: 'Apollo GraphQL rather than REST with a fetch layer' },
           {
             type: 'p',
-            text: 'The API was already GraphQL, so the real decision was how much client to put on top of it. The normalized cache is what earned Apollo its place: admin screens read the same entities from several angles — an event in a list, in a header, in a detail pane — and normalization means one mutation updates all of them without hand-written invalidation. Types generated from the schema removed a whole class of drift between client and server.',
+            text: 'The API was already GraphQL and Apollo was already the platform standard, so what was open here was how much of the client to lean on. The normalized cache is what earns it: support screens read the same entities from several angles — an organization in a list, in a header, in a detail pane — and normalization means one mutation updates all of them without hand-written invalidation. Types generated from the schema removed a whole class of drift between client and server.',
           },
           {
             type: 'p',
@@ -132,20 +137,20 @@ export const caseStudies: CaseStudy[] = [
           },
           {
             type: 'p',
-            text: 'The interesting part is the promotion criterion. Something moved into the shared library once it had a third independent consumer and no domain knowledge baked into it; anything that still had to know what an event or a registration was stayed local to its feature. Two use cases are a coincidence, and a shared component that understands the domain becomes a place where features quietly couple to each other.',
+            text: 'The interesting part is the promotion criterion, and with sections built independently it is the main thing keeping them coherent. Something moved into the shared library once it had a third independent consumer and no domain knowledge baked into it; anything that still had to know what an organization or an event was stayed local to its section. Two use cases are a coincidence, and a shared component that understands the domain becomes a place where sections quietly couple to each other.',
           },
           { type: 'h3', text: 'Application structure' },
           {
             type: 'p',
-            text: 'Organised by feature rather than by file type, with route-based splitting at the feature boundary and a shared layer features may import from but never the reverse. The rule that did the work was the direction of dependency: a feature can depend on shared and never on another feature, so anything two features genuinely needed either moved down into shared or was lifted into the route composing them. It held up, with one honest caveat — "shared" attracts things, and keeping it from becoming a second monolith inside the repository takes deliberate pruning.',
+            text: 'Organised by section rather than by file type, with route-based splitting at the section boundary and a shared layer sections may import from but never the reverse. The rule that did the work was the direction of dependency: a section can depend on shared and never on another section, which is what lets each one be built and released without waiting on the rest. Anything two sections genuinely needed either moved down into shared or was lifted into the route composing them. It has held up, with one honest caveat — "shared" attracts things, and keeping it from becoming a second monolith inside the repository takes deliberate pruning.',
           },
           {
             type: 'p',
-            text: 'Testing followed the same pragmatism: component behaviour and the shared library were covered first, because that is where a silent break propagates furthest. I chose not to test generated GraphQL types or thin presentational wrappers around MUI — those tests assert that a library still works, and they fail for reasons that have nothing to do with the product.',
+            text: 'Testing followed the same pragmatism: component behaviour and the shared library were covered first, because that is where a silent break propagates furthest — a shared table used by every section is the highest-leverage thing to hold still. I chose not to test generated GraphQL types or thin presentational wrappers around MUI — those tests assert that a library still works, and they fail for reasons that have nothing to do with the product.',
           },
           {
             type: 'note',
-            text: 'Diagram to add: one box-and-arrow of the shape of the system — admin frontend, GraphQL layer, backend services, component library as a shared dependency. Your own drawing, no internal names.',
+            text: 'Diagram to add: one box-and-arrow of the shape of the system — the internal admin frontend and its independent sections, GraphQL layer, backend services, component library as a shared dependency. Your own drawing, no internal names.',
           },
         ],
       },
@@ -155,7 +160,7 @@ export const caseStudies: CaseStudy[] = [
         blocks: [
           {
             type: 'p',
-            text: 'The application shipped and is in production, serving event organizers. The component library became the foundation the frontend work builds on — new features start from an existing vocabulary instead of re-deciding what a table, a form field or a dialog looks like.',
+            text: 'The application is in production and in active development, used by our internal team to support organizations, events and the people involved in them. Sections continue to be added independently, and the component library is the foundation they start from — a new section begins with an existing vocabulary instead of re-deciding what a table, a form field or a dialog looks like.',
           },
           {
             type: 'p',
@@ -169,15 +174,15 @@ export const caseStudies: CaseStudy[] = [
         blocks: [
           {
             type: 'p',
-            text: 'The decision that looked risky and turned out fine was Vite, at a point when it was still the less conservative choice for a production application. The feedback loop it bought compounded daily, and the migration risk I had budgeted for never arrived.',
+            text: 'The choice that looked conservative and paid off was taking the team’s existing stack wholesale instead of treating a new repository as a licence to re-decide everything. The interesting problems here were never which library to use, and spending the novelty budget elsewhere is what made the section-by-section build workable.',
           },
           {
             type: 'p',
-            text: 'The one that looked safe and turned out expensive was leaning on the normalized cache as the default answer for state. It is excellent for server data, and I let it drift into places where a plain fetch or local state would have been clearer. The debugging cost of cache-shaped bugs is paid by whoever touches the feature next, not by whoever chose the pattern.',
+            text: 'The one that looked safe and turned out expensive was leaning on the normalized cache as the default answer for state. It is excellent for server data, and I let it drift into places where a plain fetch or local state would have been clearer. The debugging cost of cache-shaped bugs is paid by whoever touches the section next, not by whoever chose the pattern.',
           },
           {
             type: 'p',
-            text: 'What I would decide differently: write the promotion criterion for the shared library down on day one instead of discovering it. Early components moved in because they looked reusable, and a few had to be pulled back out when a second consumer wanted slightly different behaviour. With a free week I would spend it on the seams rather than the surface — make the feature/shared boundary fail at build time instead of in review, and cover the awkward states in Storybook so they are designed rather than discovered.',
+            text: 'What I would decide differently: write the promotion criterion for the shared library down on day one instead of discovering it. Early components moved in because they looked reusable, and a few had to be pulled back out when a second consumer wanted slightly different behaviour. With a free week I would spend it on the seams rather than the surface — make the section/shared boundary fail at build time instead of in review, and cover the awkward support states in Storybook (missing data, restricted permissions, a record in a state nobody expected) so they are designed rather than discovered.',
           },
         ],
       },
