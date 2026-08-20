@@ -6,8 +6,7 @@
 
 export const home = {
   hero: {
-    kicker: 'London, Ontario · Remote across Canada',
-    note: 'Open to senior frontend roles — last updated August 2026.',
+    note: 'Writing on architecture, design systems, and state. Last updated August 2026.',
     facts: [
       { label: 'Role', value: 'Senior Frontend Developer' },
       { label: 'Company', value: 'ASICS Apps (Race Roster)' },
@@ -21,50 +20,25 @@ export const home = {
     work: { index: '01', label: 'Three projects' },
     experience: { index: '02', label: 'Nine years' },
     stack: { index: '03', label: 'What I actually use' },
-    notes: { index: '04', label: 'Writing' },
-    about: { index: '05', label: 'The short version' },
-    contact: { index: '06', label: 'Contact' },
+    about: { index: '04', label: 'The short version' },
+    contact: { index: '05', label: 'Contact' },
   },
 
   work: {
     heading: 'Selected work',
     intro:
-      'Two are from my work at ASICS Apps, described without internal specifics; one is my own. Written as decisions rather than screenshots.',
-    footnote:
-      'Also in progress: Forma, a client-management tool for personal trainers. Too early to be a case study, honest enough to mention.',
+      'One is from my work at ASICS Apps, described without internal specifics; two are my own. Written as decisions rather than screenshots.',
   },
 
   stack: {
     heading: 'Stack',
     groups: [
-      { name: 'Languages & frameworks', items: ['TypeScript', 'JavaScript', 'React', 'Remix (SSR)', 'Node.js'] },
+      { name: 'Languages & frameworks', items: ['TypeScript', 'JavaScript', 'React', 'React Router', 'Remix (SSR)', 'Node.js'] },
       { name: 'State & data', items: ['XState', 'Redux', 'React Query', 'Valtio', 'React Context', 'GraphQL (Apollo)', 'REST'] },
-      { name: 'Design systems & UI', items: ['Storybook', 'Radix UI', 'Material UI', 'Stitches', 'Semantic HTML', 'Responsive UI'] },
-      { name: 'Testing', items: ['Vitest', 'Jest', 'React Testing Library'] },
+      { name: 'Design systems & UI', items: ['Storybook', 'Radix UI', 'Material UI', 'Tailwind CSS', 'Stitches', 'Semantic HTML', 'Responsive UI'] },
+      { name: 'Testing', items: ['Vitest', 'Jest', 'React Testing Library', 'Playwright'] },
       { name: 'Build & delivery', items: ['Vite', 'Docker', 'GitHub Actions', 'LaunchDarkly', 'Datadog', 'Lighthouse', 'Git'] },
       { name: 'AI-assisted development', items: ['Claude Code', 'Cursor', 'MCP', 'AGENTS.md'] },
-    ],
-  },
-
-  notes: {
-    heading: 'Notes',
-    items: [
-      {
-        date: 'Aug 2026',
-        title: 'Choosing state per microfrontend',
-        blurb:
-          'Is this server data, shared client state, a workflow with rules about what can happen next, or just a value that needs to reach a few components? Four questions, four answers — and why XState is not the answer to all of them.',
-        readingTime: '9 min read',
-        href: '/work/state-per-microfrontend',
-      },
-      {
-        date: 'Aug 2026',
-        title: 'What a component library needs before its first component',
-        blurb:
-          'A promotion rule. Without one, a shared library becomes a folder — and the interesting part of a design system is deciding what does not belong in it.',
-        readingTime: '6 min read',
-        href: '/work/event-management-platform',
-      },
     ],
   },
 
@@ -97,14 +71,13 @@ export const home = {
   },
 
   contact: {
-    heading: "Let's talk",
+    heading: 'Get in touch',
     body:
-      'I am open to senior frontend roles in Canada or remote — architecture, design systems, or anything where the interface is genuinely hard. If you are hiring, or you just want to argue about state machines, email is the fastest way to reach me.',
+      'I work on the parts of a frontend that get complicated: architecture, design systems, and choosing the right state model for the problem. If you want to discuss that work, email is the fastest way to reach me.',
     links: [
       { label: 'Email', value: 'vcmiranda@outlook.com', href: 'mailto:vcmiranda@outlook.com' },
       { label: 'GitHub', value: 'github.com/vcmiranda', href: 'https://github.com/vcmiranda' },
       { label: 'LinkedIn', value: 'linkedin.com/in/vcmiranda', href: 'https://www.linkedin.com/in/vcmiranda' },
-      { label: 'Location', value: 'London, ON — remote across Canada', href: '#contact' },
     ],
   },
 } as const

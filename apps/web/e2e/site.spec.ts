@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 
-const ROUTES = ['/', '/work', '/work/state-per-microfrontend', '/work/nami', '/about', '/resume']
+const ROUTES = ['/', '/work', '/work/event-management-platform', '/work/nami', '/about', '/resume']
 
 test.describe('accessibility', () => {
   for (const route of ROUTES) {
@@ -24,8 +24,8 @@ test('primary CTA reaches the work section', async ({ page }) => {
 
 test('a project card opens its case study', async ({ page }) => {
   await page.goto('/work')
-  await page.getByRole('link', { name: /Choosing state per microfrontend/ }).first().click()
-  await expect(page).toHaveURL(/\/work\/state-per-microfrontend$/)
+  await page.getByRole('link', { name: /Building a platform frontend from scratch/ }).first().click()
+  await expect(page).toHaveURL(/\/work\/event-management-platform$/)
   await expect(page.getByRole('heading', { name: 'Context', exact: true })).toBeVisible()
 })
 

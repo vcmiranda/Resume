@@ -42,19 +42,17 @@ accent), \`.reveal\` (scroll entrance). Instrument Serif and Inter are gone.
 **Colour.** Steel stays the primary accent; a copper second accent
 (\`--accent-2\`) carries the counting elements only — section indices, card
 numbers, dates, the "+" markers, principle titles and the secondary button.
-The Notes section keeps the page ground (\`--field: transparent\`), framed as a
-blueprint object —
-and the stack list uses tinted \`.chip\` instead of grey. Two accents, no more.
+The stack list uses tinted \`.chip\` instead of grey. Two accents, no more.
 
 **Home** is now the whole site: hero + spec panel, selected work, experience
-ledger, stack, notes, about, contact. Copy comes from \`content/home.ts\`;
+ledger, stack, about, contact. Copy comes from \`content/home.ts\`;
 experience rows read \`resume.roles\` and the cards read \`featuredProjects\`, so
 nothing is duplicated. The contact panel reuses \`ContactFormLazy\` — the real
 form, still posting to \`/api/contact\`.
 
 **Nav** points at anchors on \`/\` (\`/#work\`, \`/#experience\`, …). The standalone
 routes still exist and are still prerendered; the case-study links on the work
-cards and notes go to them. \`Header\` no longer uses \`NavLink\` (anchors have no
+cards go to them. \`Header\` no longer uses \`NavLink\` (anchors have no
 active state), so \`cn\` is no longer imported there.
 
 ## Two things to check before pushing

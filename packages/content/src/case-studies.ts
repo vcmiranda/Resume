@@ -12,6 +12,7 @@ export type Block =
   | { type: 'ul'; items: string[] }
   | { type: 'h3'; text: string }
   | { type: 'note'; text: string }
+  | { type: 'figure'; src: string; alt: string; caption: string }
   | { type: 'todo'; text: string }
 
 export type Section = { id: string; heading: string; blocks: Block[] }
@@ -45,8 +46,8 @@ export const caseStudies: CaseStudy[] = [
             text: 'ASICS Apps builds Race Roster, a race-registration platform used by event organizers and athletes. As part of a platform upgrade, the system was split into separate parts, each with its own repository and deployment. The admin section became its own system.',
           },
           {
-            type: 'todo',
-            text: 'One sentence on what the admin section does for organizers — creating events, managing registrations, reporting? Keep it to what is publicly evident from the product. Also: what drove the split — release independence, team autonomy, tech debt, scaling?',
+            type: 'p',
+            text: 'It is an internal tool, not a customer-facing one. The admin is where our own team manages everything users create on the platform and resolves the problems they run into: supporting the organizations, their events, the financial side, and the questions that come from organizers and participants alike. When support is the product, the people using it are colleagues — which changes what "good" means. Speed and density beat polish, and a wrong answer on screen becomes a wrong answer given to a customer.',
           },
         ],
       },
@@ -56,11 +57,15 @@ export const caseStudies: CaseStudy[] = [
         blocks: [
           {
             type: 'p',
-            text: 'The admin frontend did not exist yet. There was an existing product to match in behaviour and expectation, a backend to integrate with, and no established frontend foundation in the new repository.',
+            text: 'The admin frontend did not exist yet. There was an existing product to match in behaviour and expectation, a backend to integrate with, and no established frontend foundation in the new repository. It is still in development: each area is built independently of the others, so the application grows one capability at a time rather than arriving finished.',
           },
           {
-            type: 'todo',
-            text: 'What made this genuinely hard? Domain complexity of event management, migrating users without disruption, matching legacy behaviour, timeline? A case study with no difficulty in it reads as a chore log.',
+            type: 'p',
+            text: 'The hard part was not writing screens. A support tool has to expose the whole platform — organizations, events, financials, participants — to people who arrive at it mid-problem, with a customer waiting. Much of the behaviour worth matching had accumulated in the old system over years and was never written down, so the specification was the legacy code and the product itself.',
+          },
+          {
+            type: 'p',
+            text: 'Building it section by section makes that harder, not easier. Each area is developed independently, so what holds the application together is convention rather than a single plan: without a shared vocabulary for tables, filters, forms and permissions, independent sections drift into feeling like separate products stitched behind one login. And the foundation had to be laid while feature work was already expected, so anything set early was expensive to reverse.',
           },
         ],
       },
@@ -70,129 +75,15 @@ export const caseStudies: CaseStudy[] = [
         blocks: [
           {
             type: 'p',
-            text: 'I built the frontend application from scratch and owned its architecture. I selected the stack and set up the project, then developed the application and its component library as it grew.',
+            text: 'I built the frontend application from the beginning and set up the project. The stack itself was largely inherited: our senior team — which I am part of — had settled it across our other projects, so the decisions made here were the ones underneath that line, about how the application is put together rather than what it is written in.',
           },
-          {
-            type: 'todo',
-            text: 'Team context: how many frontend engineers, and were you the first or only one at the start? "I was the first frontend engineer on the new repo" is a strong, specific sentence if it is true.',
-          },
-        ],
-      },
-      {
-        id: 'constraints',
-        heading: 'Constraints',
-        blocks: [
-          {
-            type: 'todo',
-            text: 'Pick the two or three that were real: an existing GraphQL schema shaped by the previous system; feature parity with the section being replaced; a small team, so the foundation had to be learnable by people who had not built it; timeline pressure from the wider split; existing brand and design conventions.',
-          },
-        ],
-      },
-      {
-        id: 'approach',
-        heading: 'Approach and technical decisions',
-        blocks: [
-          { type: 'h3', text: 'React and TypeScript' },
           {
             type: 'p',
-            text: "The team's existing stack, so the choice was about consistency and hiring rather than novelty. Not every decision needs to be interesting.",
+            text: 'Alongside the code, I am one of the people responsible for how the interface behaves — using the available UI library as the pattern and deciding what a screen does when data is missing, slow, restricted or wrong, which in a support tool is most of the design work. I also worked with the infrastructure team to get CI/CD running on GitHub for the new repository.',
           },
-          { type: 'h3', text: 'Vite over the alternatives' },
           {
             type: 'p',
-            text: 'For a greenfield repository where the developer feedback loop is the thing you pay for every day for years, build speed is an architecture decision, not a preference.',
-          },
-          { type: 'h3', text: 'Apollo GraphQL rather than REST with a fetch layer' },
-          {
-            type: 'todo',
-            text: 'Was the API already GraphQL, or was that decided here? What did the normalized cache buy, and what did it cost? Be honest about the cost — every senior reader knows Apollo has one.',
-          },
-          { type: 'h3', text: 'Material UI as the base, extended rather than replaced' },
-          {
-            type: 'p',
-            text: 'Building on an existing accessible component set rather than from zero, then deciding where the abstraction stopped: which components wrapped MUI, which were built independently, and how to keep consumers from reaching past that layer.',
-          },
-          { type: 'h3', text: 'The component library and Storybook' },
-          {
-            type: 'p',
-            text: 'Storybook served as both documentation and a development environment. The interesting part is the promotion criterion — what is general enough to move into the shared library versus what stays local to a feature.',
-          },
-          {
-            type: 'todo',
-            text: 'Application structure: feature folders, route-based splitting, a shared/domain boundary? What convention did you set, and did it hold up? Also what you chose not to test, and why.',
-          },
-          {
-            type: 'note',
-            text: 'Diagram to add: one box-and-arrow of the shape of the system — admin frontend, GraphQL layer, backend services, component library as a shared dependency. Your own drawing, no internal names.',
-          },
-        ],
-      },
-      {
-        id: 'outcome',
-        heading: 'Outcome',
-        blocks: [
-          {
-            type: 'p',
-            text: 'The application shipped and is in production, serving event organizers. The component library became the foundation the frontend work builds on.',
-          },
-          {
-            type: 'todo',
-            text: 'Add whatever you can source: number of screens or modules, time from empty repo to first production release, engineers now working in it. If you have nothing shareable, say so plainly — "I cannot share usage numbers publicly, but I am happy to talk through them" costs nothing and reads as trustworthy.',
-          },
-        ],
-      },
-      {
-        id: 'lessons',
-        heading: 'Lessons and next iteration',
-        blocks: [
-          {
-            type: 'todo',
-            text: 'The most valuable section here and the one candidates skip. What would you decide differently now? Which decision looked risky and turned out fine, or looked safe and turned out expensive? What would you change with a free week? A senior reader trusts a case study with a real regret in it.',
-          },
-        ],
-      },
-    ],
-  },
-
-  {
-    slug: 'state-per-microfrontend',
-    sections: [
-      {
-        id: 'context',
-        heading: 'Context',
-        blocks: [
-          {
-            type: 'p',
-            text: 'Our frontend is split across multiple microfrontends, each owned and deployed independently. That structure means state management does not have to be a single global decision — each surface can use what suits it, at the cost of consistency across the whole.',
-          },
-          { type: 'todo', text: 'How many microfrontends? One number, and the claim becomes concrete.' },
-        ],
-      },
-      {
-        id: 'problem',
-        heading: 'Problem',
-        blocks: [
-          {
-            type: 'p',
-            text: 'Flows with branching paths, asynchronous steps that can fail, back-navigation, and states that should not be reachable are exactly where ad-hoc state management stops scaling. Every guard becomes a boolean, every boolean multiplies the state space, and eventually the bugs are combinations nobody enumerated.',
-          },
-          {
-            type: 'todo',
-            text: 'What triggered the evaluation? A flow that had become unmanageable, a new microfrontend starting fresh, or a bug class you kept hitting?',
-          },
-        ],
-      },
-      {
-        id: 'role',
-        heading: 'My role and ownership',
-        blocks: [
-          {
-            type: 'p',
-            text: 'I implemented the XState workflows in our React applications, following a team evaluation of the options.',
-          },
-          {
-            type: 'todo',
-            text: 'Be precise: did you run the evaluation, contribute to it, or implement its outcome? And which of Redux, React Query, Valtio and Context did you personally implement? "I implemented the outcome of a team evaluation" is still a strong sentence.',
+            text: 'What later frontend work in that repository stands on — component conventions, folder structure, the shape of the data layer, the pipeline — was set here, and I stayed close to it as other engineers started contributing on top.',
           },
         ],
       },
@@ -203,14 +94,12 @@ export const caseStudies: CaseStudy[] = [
           {
             type: 'ul',
             items: [
-              'A team that has to maintain this, so novelty has a real cost',
-              'Multiple microfrontends, so a choice made in one should not force the others',
-              'Existing code in existing tools — nothing greenfield',
+              'A GraphQL schema shaped by the previous system. The API was a contract to fit into, not something the new frontend got to design.',
+              'A stack already chosen across our other projects. Consistency was the point, so this repository was not the place to relitigate it.',
+              'Sections built independently of each other, which puts the weight on shared conventions instead of a single up-front plan.',
+              'A foundation that had to be learnable by people who had not built it, which rules out architecture only its author can navigate.',
+              'An existing UI library and design conventions, so the pattern layer had to carry them rather than each section re-deciding.',
             ],
-          },
-          {
-            type: 'todo',
-            text: 'Any of: bundle size, SSR compatibility, devtools and debuggability, testability?',
           },
         ],
       },
@@ -218,34 +107,53 @@ export const caseStudies: CaseStudy[] = [
         id: 'approach',
         heading: 'Approach and technical decisions',
         blocks: [
-          { type: 'h3', text: 'Why XState won for workflow-driven flows' },
-          {
-            type: 'todo',
-            text: 'Which of these were the actual reasons: making invalid states unrepresentable, the statechart as a shared artifact between engineering and product, testability of transitions independent of the UI, the visualizer, async invocation and cancellation, guards and hierarchical states?',
-          },
-          { type: 'h3', text: 'Why not XState everywhere' },
+          { type: 'h3', text: 'React and TypeScript' },
           {
             type: 'p',
-            text: 'The most persuasive part of the argument. The honest answer — learning curve, verbosity for simple cases, and the fact that most state is not a workflow — is what separates an engineer from an advocate.',
+            text: "Worth saying plainly: almost all of the technology here was pre-defined by our senior team, and adopting it was the right call rather than an interesting one. React and TypeScript were already the team's stack, so the value was consistency — engineers moving between our projects, and patterns that travel with them. Not every decision needs to be a decision.",
           },
-          { type: 'h3', text: 'React Query for server state' },
+          { type: 'h3', text: 'Vite as the build tool' },
           {
             type: 'p',
-            text: 'Server state and client state are different problems. A lot of historical Redux complexity came from using a client-state tool to cache server data. Naming that distinction out loud changes how the rest of the decisions read.',
+            text: 'Also inherited, and the part of the inheritance I would have chosen anyway. In a repository where the developer feedback loop is what you pay for every day for years, build speed is an architecture decision rather than a preference.',
           },
-          { type: 'h3', text: 'Redux, Valtio and Context where each fits' },
+          { type: 'h3', text: 'Apollo GraphQL rather than REST with a fetch layer' },
           {
             type: 'p',
-            text: 'Redux where it was already the right answer: large shared client state, established devtools workflow, existing team fluency. Valtio where the ceremony was not worth it — proxy-based mutable state for local, self-contained cases. Context for what it is actually for: dependency injection of stable values, not state management.',
+            text: 'The API was already GraphQL and Apollo was already the platform standard, so what was open here was how much of the client to lean on. The normalized cache is what earns it: support screens read the same entities from several angles — an organization in a list, in a header, in a detail pane — and normalization means one mutation updates all of them without hand-written invalidation. Types generated from the schema removed a whole class of drift between client and server.',
           },
-          { type: 'h3', text: 'The selection heuristic' },
           {
             type: 'p',
-            text: 'Is this server data, shared client state, a workflow with rules about what can happen next, or just a value that needs to reach a few components? Four questions, four answers.',
+            text: 'The cost is real. The cache is a second source of truth with its own mental model, and its failure mode is not a crash but a stale pane after a mutation — the kind of bug that surfaces in someone else’s feature weeks later. It is also a heavy dependency for screens that fetch once and never change. Worth it for a surface this entity-dense and mutation-heavy; not a default I would carry to a read-only one.',
+          },
+          { type: 'h3', text: 'Material UI as the base, extended rather than replaced' },
+          {
+            type: 'p',
+            text: 'Building on an existing accessible component set rather than from zero, then deciding where the abstraction stopped: which components wrapped MUI, which were built independently, and how to keep consumers from reaching past that layer. Theming carried the brand so product code never reached for a raw colour or spacing value, and the wrappers narrowed MUI’s very wide prop surface to the few variants the product actually uses — which is what stops twelve subtly different buttons from appearing.',
+          },
+          { type: 'h3', text: 'The component library and Storybook' },
+          {
+            type: 'p',
+            text: 'Storybook served as both documentation and a development environment: components were built and reviewed in isolation, including the states that are awkward to reach in the running app — loading, empty, error, long content, permission-restricted.',
           },
           {
-            type: 'note',
-            text: 'Diagram to add: a statechart of an illustrative multi-step flow — a generic registration wizard with validation, an async submit that can fail, retry and back-navigation. Draw it as a teaching example, not your employer’s machine.',
+            type: 'p',
+            text: 'The interesting part is the promotion criterion, and with sections built independently it is the main thing keeping them coherent. Something moved into the shared library once it had a third independent consumer and no domain knowledge baked into it; anything that still had to know what an organization or an event was stayed local to its section. Two use cases are a coincidence, and a shared component that understands the domain becomes a place where sections quietly couple to each other.',
+          },
+          { type: 'h3', text: 'Application structure' },
+          {
+            type: 'p',
+            text: 'Organised by section rather than by file type, with route-based splitting at the section boundary and a shared layer sections may import from but never the reverse. The rule that did the work was the direction of dependency: a section can depend on shared and never on another section, which is what lets each one be built and released without waiting on the rest. Anything two sections genuinely needed either moved down into shared or was lifted into the route composing them. It has held up, with one honest caveat — "shared" attracts things, and keeping it from becoming a second monolith inside the repository takes deliberate pruning.',
+          },
+          {
+            type: 'p',
+            text: 'Testing followed the same pragmatism: component behaviour and the shared library were covered first, because that is where a silent break propagates furthest — a shared table used by every section is the highest-leverage thing to hold still. I chose not to test generated GraphQL types or thin presentational wrappers around MUI — those tests assert that a library still works, and they fail for reasons that have nothing to do with the product.',
+          },
+          {
+            type: 'figure',
+            src: '/system-diagram.svg',
+            alt: 'The internal admin frontend and its independently built sections sit above a GraphQL layer, which fans out to backend services owned by other teams. A shared component library is imported by every section, and a CI/CD pipeline runs typecheck, tests, build and preview deploys.',
+            caption: 'The shape of the system. Section names are generic — the structure is the point.',
           },
         ],
       },
@@ -254,8 +162,12 @@ export const caseStudies: CaseStudy[] = [
         heading: 'Outcome',
         blocks: [
           {
-            type: 'todo',
-            text: 'Pick what is true: the flow shipped and the state model held; a class of bug stopped occurring; the statechart became a shared reference in team conversations; onboarding got easier because the machine documented the flow.',
+            type: 'p',
+            text: 'The application is in production and in active development, used by our internal team to support organizations, events and the people involved in them. Sections continue to be added independently, and the component library is the foundation they start from — a new section begins with an existing vocabulary instead of re-deciding what a table, a form field or a dialog looks like.',
+          },
+          {
+            type: 'p',
+            text: 'I cannot share usage numbers, timelines or team metrics publicly, but I am happy to talk through them.',
           },
         ],
       },
@@ -264,8 +176,16 @@ export const caseStudies: CaseStudy[] = [
         heading: 'Lessons and next iteration',
         blocks: [
           {
-            type: 'todo',
-            text: 'Would you use XState v5 differently? Is there a flow you would migrate now, or one you would migrate away from? Where has per-microfrontend freedom cost you consistency? What would you standardise if you started over?',
+            type: 'p',
+            text: 'The choice that looked conservative and paid off was taking the team’s existing stack wholesale instead of treating a new repository as a licence to re-decide everything. The interesting problems here were never which library to use, and spending the novelty budget elsewhere is what made the section-by-section build workable.',
+          },
+          {
+            type: 'p',
+            text: 'The one that looked safe and turned out expensive was leaning on the normalized cache as the default answer for state. It is excellent for server data, and I let it drift into places where a plain fetch or local state would have been clearer. The debugging cost of cache-shaped bugs is paid by whoever touches the section next, not by whoever chose the pattern.',
+          },
+          {
+            type: 'p',
+            text: 'What I would decide differently: write the promotion criterion for the shared library down on day one instead of discovering it. Early components moved in because they looked reusable, and a few had to be pulled back out when a second consumer wanted slightly different behaviour. With a free week I would spend it on the seams rather than the surface — make the section/shared boundary fail at build time instead of in review, and cover the awkward support states in Storybook (missing data, restricted permissions, a record in a state nobody expected) so they are designed rather than discovered.',
           },
         ],
       },

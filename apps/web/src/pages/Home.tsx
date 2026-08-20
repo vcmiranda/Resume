@@ -4,7 +4,7 @@ import { Container } from '@/components/layout/Container'
 import { Blueprint } from '@/components/layout/Blueprint'
 import { Reveal } from '@/components/layout/Reveal'
 import { ContactFormLazy } from '@/components/sections/ContactFormLazy'
-import { featuredProjects, home, resume, site } from '@vcm/content'
+import { featuredProjects, getCaseStudy, home, resume, site } from '@vcm/content'
 
 const RULE = 'border-t border-[var(--border)]'
 
@@ -38,11 +38,6 @@ export function Home() {
       <Container className="border-b border-[var(--border)] pt-16 pb-14 sm:pt-20 sm:pb-16">
         <div className="grid gap-12 lg:grid-cols-[1.55fr_1fr] lg:items-start lg:gap-14">
           <Reveal>
-            <div className="mb-6 flex items-center gap-3">
-              <span className="eyebrow">{home.hero.kicker}</span>
-              <span className="h-px flex-1 bg-[var(--border)]" />
-            </div>
-
             <h1 className="display text-3xl sm:text-4xl">{site.positioning}</h1>
 
             <p className="mt-6 max-w-[56ch] text-lg text-[var(--text)]/85">
@@ -146,16 +141,12 @@ export function Home() {
                   to={`/work/${project.slug}`}
                   className="font-display inline-flex items-center gap-2 text-xs tracking-[0.12em] uppercase text-[var(--accent-strong)] no-underline hover:underline"
                 >
-                  Read the case study
+                  {getCaseStudy(project.slug) ? 'Read the case study' : 'See the project'}
                   <span aria-hidden>→</span>
                 </Link>
               </Reveal>
             ))}
           </div>
-
-          <Reveal>
-            <p className="mt-6 text-sm text-muted">{home.work.footnote}</p>
-          </Reveal>
         </Container>
       </section>
 
@@ -226,41 +217,6 @@ export function Home() {
                 </ul>
               </Reveal>
             ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Notes ------------------------------------------------------------ */}
-      <section id="notes" aria-labelledby="notes-heading" className="border-b border-[var(--border)]">
-        <Container className="py-16 sm:py-18">
-          <SectionHeading id="notes-heading" {...home.sections.notes}>
-            {home.notes.heading}
-          </SectionHeading>
-
-          <div className="field-plate blueprint px-7 pt-2.5 pb-6">
-            <Blueprint />
-            {home.notes.items.map((note) => (
-              <Reveal key={note.title}>
-                <Link
-                  to={note.href}
-                  className="rule-invert grid items-baseline gap-x-6 gap-y-2 border-t px-0.5 py-5 text-[var(--field-text)] no-underline transition-colors duration-150 hover:bg-[color-mix(in_srgb,var(--accent)_10%,transparent)] sm:grid-cols-[120px_1fr_130px]"
-                >
-                  <span className="font-display text-xs tracking-[0.14em] uppercase text-[var(--accent-2-strong)]">
-                    {note.date}
-                  </span>
-                  <span>
-                    <span className="font-display block text-lg font-semibold">{note.title}</span>
-                    <span className="mt-1.5 block max-w-[70ch] text-[var(--field-text)]/75">
-                      {note.blurb}
-                    </span>
-                  </span>
-                  <span className="font-display text-xs tracking-[0.14em] uppercase text-[var(--field-text)]/55 sm:text-right">
-                    {note.readingTime}
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-            <div className="rule-invert border-t" />
           </div>
         </Container>
       </section>

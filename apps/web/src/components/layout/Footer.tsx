@@ -5,9 +5,7 @@ export function Footer() {
   return (
     <footer className="border-t border-[var(--border)] py-6 text-sm text-muted">
       <Container className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p>
-          {site.name} — {site.location}
-        </p>
+        <p>{site.name}</p>
         <nav aria-label="Elsewhere" className="flex gap-5">
           <a className="hover:text-[var(--accent)]" href={site.social.github}>
             GitHub

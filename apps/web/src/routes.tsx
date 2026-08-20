@@ -44,9 +44,9 @@ export const pages: ResolvedMeta[] = [
     path: '/work',
     title: 'Work',
     description:
-      'Case studies on building a platform frontend from scratch, choosing state management per microfrontend, and building a native macOS file manager.',
+      'Case studies on building a platform frontend from scratch and building a native macOS file manager.',
     ogTitle: 'Selected work',
-    ogDescription: 'Three projects, in enough detail to be useful.',
+    ogDescription: 'Two projects, in enough detail to be useful.',
   }),
   ...projects.map((p) =>
     buildMeta({

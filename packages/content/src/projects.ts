@@ -29,7 +29,7 @@ export const projects: Project[] = [
     slug: 'event-management-platform',
     title: 'Building a platform frontend from scratch',
     summary:
-      'When our event-management admin was split out of a monolith, I built its frontend from zero — choosing the stack, owning the architecture, and growing a component library alongside it.',
+      'When our internal admin was split out of a monolith, I built its frontend from zero — the structure it grew into, the component library underneath it, and the CI/CD pipeline around it.',
     context: 'ASICS Apps (Race Roster) · 2021–present',
     role: 'Frontend architecture and implementation',
     stack: ['React', 'TypeScript', 'Vite', 'Apollo GraphQL', 'Material UI', 'Storybook'],
@@ -39,28 +39,9 @@ export const projects: Project[] = [
     seo: {
       title: 'Building a platform frontend from scratch',
       description:
-        'How I built the frontend of an event-management admin platform from zero: stack selection, architecture, and the component system that grew with it.',
+        'Building the frontend of an internal admin platform from zero: the structure, the conventions holding independently built sections together, and the component system.',
       ogTitle: 'Building a platform frontend from scratch',
-      ogDescription: 'React, TypeScript, Vite, Apollo GraphQL — and the decisions behind each.',
-    },
-  },
-  {
-    slug: 'state-per-microfrontend',
-    title: 'Choosing state per microfrontend',
-    summary:
-      'XState for workflow-driven flows, Redux, React Query, Valtio and Context elsewhere. On how our team evaluated them, why each won where it did, and the heuristic I use to choose.',
-    context: 'ASICS Apps (Race Roster) · ongoing',
-    role: 'Implementation and technical evaluation',
-    stack: ['XState', 'Redux', 'React Query', 'Valtio', 'React Context', 'Architecture'],
-    featured: true,
-    order: 2,
-    confidential: true,
-    seo: {
-      title: 'Choosing state per microfrontend',
-      description:
-        'XState, Redux, React Query, Valtio and Context across different microfrontends — why each won where it did, and the heuristic I use to choose.',
-      ogTitle: 'Choosing state per microfrontend',
-      ogDescription: 'Five state solutions, one selection heuristic.',
+      ogDescription: 'React, TypeScript, Vite, Apollo GraphQL — and the decisions underneath them.',
     },
   },
   {
@@ -72,7 +53,7 @@ export const projects: Project[] = [
     role: 'Sole designer and developer',
     stack: ['Tauri 2', 'macOS', 'Interaction design'],
     featured: true,
-    order: 3,
+    order: 2,
     confidential: false,
     repo: 'nami',
     seo: {
@@ -92,8 +73,8 @@ export const projects: Project[] = [
     context: 'Personal project',
     role: 'Sole designer and developer',
     stack: ['TypeScript'],
-    featured: false,
-    order: 4,
+    featured: true,
+    order: 3,
     confidential: false,
     repo: 'forma',
     seo: {

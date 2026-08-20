@@ -7,7 +7,6 @@
 export const site = {
   name: 'Vitor Miranda',
   title: 'Senior Frontend Engineer',
-  location: 'London, Ontario, Canada',
   email: 'vcmiranda@outlook.com',
   canonicalUrl: 'https://www.vcmiranda.me',
   githubUser: 'vcmiranda',
@@ -56,8 +55,8 @@ export const site = {
   },
 
   contact: {
-    heading: "Let's talk",
-    body: 'I am open to senior frontend roles in Canada or remote. If you are hiring, or you just want to argue about state machines, email is the fastest way to reach me.',
+    heading: 'Get in touch',
+    body: 'I work on the parts of a frontend that get complicated: architecture, design systems, and choosing the right state model for the problem. If you want to discuss that work, email is the fastest way to reach me.',
     formNote: 'Prefer a form? This one reaches the same inbox.',
     successMessage: "Thanks — that reached my inbox. I'll reply within a day or two.",
     errorMessage: 'Something went wrong sending that. Email me directly and I will pick it up.',
