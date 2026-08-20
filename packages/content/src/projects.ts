@@ -45,25 +45,6 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: 'state-per-microfrontend',
-    title: 'Choosing state per microfrontend',
-    summary:
-      'XState for workflow-driven flows, Redux, React Query, Valtio and Context elsewhere. On how our team evaluated them, why each won where it did, and the heuristic I use to choose.',
-    context: 'ASICS Apps (Race Roster) · ongoing',
-    role: 'Implementation and technical evaluation',
-    stack: ['XState', 'Redux', 'React Query', 'Valtio', 'React Context', 'Architecture'],
-    featured: true,
-    order: 2,
-    confidential: true,
-    seo: {
-      title: 'Choosing state per microfrontend',
-      description:
-        'XState, Redux, React Query, Valtio and Context across different microfrontends — why each won where it did, and the heuristic I use to choose.',
-      ogTitle: 'Choosing state per microfrontend',
-      ogDescription: 'Five state solutions, one selection heuristic.',
-    },
-  },
-  {
     slug: 'nami',
     title: 'Nami — a file manager for people who hit the edges of Finder',
     summary:

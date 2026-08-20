@@ -18,7 +18,7 @@ export const home = {
   },
 
   sections: {
-    work: { index: '01', label: 'Three projects' },
+    work: { index: '01', label: 'Two projects' },
     experience: { index: '02', label: 'Nine years' },
     stack: { index: '03', label: 'What I actually use' },
     notes: { index: '04', label: 'Writing' },
@@ -29,7 +29,7 @@ export const home = {
   work: {
     heading: 'Selected work',
     intro:
-      'Two are from my work at ASICS Apps, described without internal specifics; one is my own. Written as decisions rather than screenshots.',
+      'One is from my work at ASICS Apps, described without internal specifics; one is my own. Written as decisions rather than screenshots.',
     footnote:
       'Also in progress: Forma, a client-management tool for personal trainers. Too early to be a case study, honest enough to mention.',
   },
@@ -49,14 +49,6 @@ export const home = {
   notes: {
     heading: 'Notes',
     items: [
-      {
-        date: 'Aug 2026',
-        title: 'Choosing state per microfrontend',
-        blurb:
-          'Is this server data, shared client state, a workflow with rules about what can happen next, or just a value that needs to reach a few components? Four questions, four answers — and why XState is not the answer to all of them.',
-        readingTime: '9 min read',
-        href: '/work/state-per-microfrontend',
-      },
       {
         date: 'Aug 2026',
         title: 'What a component library needs before its first component',

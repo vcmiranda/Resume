@@ -51,7 +51,6 @@ describe('case studies', () => {
 
   it('marks employer work as confidential so the disclosure note renders', () => {
     expect(getProject('event-management-platform')?.confidential).toBe(true)
-    expect(getProject('state-per-microfrontend')?.confidential).toBe(true)
   })
 
   it('resolves by slug', () => {
