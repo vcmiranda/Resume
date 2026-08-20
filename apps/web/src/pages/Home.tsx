@@ -38,11 +38,6 @@ export function Home() {
       <Container className="border-b border-[var(--border)] pt-16 pb-14 sm:pt-20 sm:pb-16">
         <div className="grid gap-12 lg:grid-cols-[1.55fr_1fr] lg:items-start lg:gap-14">
           <Reveal>
-            <div className="mb-6 flex items-center gap-3">
-              <span className="eyebrow">{home.hero.kicker}</span>
-              <span className="h-px flex-1 bg-[var(--border)]" />
-            </div>
-
             <h1 className="display text-3xl sm:text-4xl">{site.positioning}</h1>
 
             <p className="mt-6 max-w-[56ch] text-lg text-[var(--text)]/85">

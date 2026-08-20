@@ -6,8 +6,7 @@
 
 export const home = {
   hero: {
-    kicker: 'London, Ontario · Remote across Canada',
-    note: 'Open to senior frontend roles — last updated August 2026.',
+    note: 'Writing on architecture, design systems, and state. Last updated August 2026.',
     facts: [
       { label: 'Role', value: 'Senior Frontend Developer' },
       { label: 'Company', value: 'ASICS Apps (Race Roster)' },
@@ -72,14 +71,13 @@ export const home = {
   },
 
   contact: {
-    heading: "Let's talk",
+    heading: 'Get in touch',
     body:
-      'I am open to senior frontend roles in Canada or remote — architecture, design systems, or anything where the interface is genuinely hard. If you are hiring, or you just want to argue about state machines, email is the fastest way to reach me.',
+      'I work on the parts of a frontend that get complicated: architecture, design systems, and choosing the right state model for the problem. If you want to discuss that work, email is the fastest way to reach me.',
     links: [
       { label: 'Email', value: 'vcmiranda@outlook.com', href: 'mailto:vcmiranda@outlook.com' },
       { label: 'GitHub', value: 'github.com/vcmiranda', href: 'https://github.com/vcmiranda' },
       { label: 'LinkedIn', value: 'linkedin.com/in/vcmiranda', href: 'https://www.linkedin.com/in/vcmiranda' },
-      { label: 'Location', value: 'London, ON — remote across Canada', href: '#contact' },
     ],
   },
 } as const
