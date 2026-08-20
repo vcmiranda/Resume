@@ -152,10 +152,6 @@ export function Home() {
               </Reveal>
             ))}
           </div>
-
-          <Reveal>
-            <p className="mt-6 text-sm text-muted">{home.work.footnote}</p>
-          </Reveal>
         </Container>
       </section>
 

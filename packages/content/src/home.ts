@@ -29,8 +29,6 @@ export const home = {
     heading: 'Selected work',
     intro:
       'One is from my work at ASICS Apps, described without internal specifics; two are my own. Written as decisions rather than screenshots.',
-    footnote:
-      'Forma is the one I am building now — too early for a case study, honest enough to show.',
   },
 
   stack: {
