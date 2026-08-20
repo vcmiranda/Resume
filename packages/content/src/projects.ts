@@ -39,7 +39,7 @@ export const projects: Project[] = [
     seo: {
       title: 'Building a platform frontend from scratch',
       description:
-        'How I built the frontend of an internal admin platform from zero: the structure, the conventions holding independently built sections together, and the component system that grew with it.',
+        'Building the frontend of an internal admin platform from zero: the structure, the conventions holding independently built sections together, and the component system.',
       ogTitle: 'Building a platform frontend from scratch',
       ogDescription: 'React, TypeScript, Vite, Apollo GraphQL — and the decisions underneath them.',
     },

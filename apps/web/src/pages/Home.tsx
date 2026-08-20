@@ -230,41 +230,6 @@ export function Home() {
         </Container>
       </section>
 
-      {/* Notes ------------------------------------------------------------ */}
-      <section id="notes" aria-labelledby="notes-heading" className="border-b border-[var(--border)]">
-        <Container className="py-16 sm:py-18">
-          <SectionHeading id="notes-heading" {...home.sections.notes}>
-            {home.notes.heading}
-          </SectionHeading>
-
-          <div className="field-plate blueprint px-7 pt-2.5 pb-6">
-            <Blueprint />
-            {home.notes.items.map((note) => (
-              <Reveal key={note.title}>
-                <Link
-                  to={note.href}
-                  className="rule-invert grid items-baseline gap-x-6 gap-y-2 border-t px-0.5 py-5 text-[var(--field-text)] no-underline transition-colors duration-150 hover:bg-[color-mix(in_srgb,var(--accent)_10%,transparent)] sm:grid-cols-[120px_1fr_130px]"
-                >
-                  <span className="font-display text-xs tracking-[0.14em] uppercase text-[var(--accent-2-strong)]">
-                    {note.date}
-                  </span>
-                  <span>
-                    <span className="font-display block text-lg font-semibold">{note.title}</span>
-                    <span className="mt-1.5 block max-w-[70ch] text-[var(--field-text)]/75">
-                      {note.blurb}
-                    </span>
-                  </span>
-                  <span className="font-display text-xs tracking-[0.14em] uppercase text-[var(--field-text)]/55 sm:text-right">
-                    {note.readingTime}
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-            <div className="rule-invert border-t" />
-          </div>
-        </Container>
-      </section>
-
       {/* About ------------------------------------------------------------ */}
       <section id="about" aria-labelledby="about-heading" className="border-b border-[var(--border)]">
         <Container className="py-16 sm:py-18">

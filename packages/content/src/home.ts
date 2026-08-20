@@ -21,9 +21,8 @@ export const home = {
     work: { index: '01', label: 'Three projects' },
     experience: { index: '02', label: 'Nine years' },
     stack: { index: '03', label: 'What I actually use' },
-    notes: { index: '04', label: 'Writing' },
-    about: { index: '05', label: 'The short version' },
-    contact: { index: '06', label: 'Contact' },
+    about: { index: '04', label: 'The short version' },
+    contact: { index: '05', label: 'Contact' },
   },
 
   work: {
@@ -43,20 +42,6 @@ export const home = {
       { name: 'Testing', items: ['Vitest', 'Jest', 'React Testing Library'] },
       { name: 'Build & delivery', items: ['Vite', 'Docker', 'GitHub Actions', 'LaunchDarkly', 'Datadog', 'Lighthouse', 'Git'] },
       { name: 'AI-assisted development', items: ['Claude Code', 'Cursor', 'MCP', 'AGENTS.md'] },
-    ],
-  },
-
-  notes: {
-    heading: 'Notes',
-    items: [
-      {
-        date: 'Aug 2026',
-        title: 'What a component library needs before its first component',
-        blurb:
-          'A promotion rule. Without one, a shared library becomes a folder — and the interesting part of a design system is deciding what does not belong in it.',
-        readingTime: '6 min read',
-        href: '/work/event-management-platform',
-      },
     ],
   },
 
