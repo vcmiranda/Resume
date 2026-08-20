@@ -36,10 +36,10 @@ export const home = {
   stack: {
     heading: 'Stack',
     groups: [
-      { name: 'Languages & frameworks', items: ['TypeScript', 'JavaScript', 'React', 'Remix (SSR)', 'Node.js'] },
+      { name: 'Languages & frameworks', items: ['TypeScript', 'JavaScript', 'React', 'React Router', 'Remix (SSR)', 'Node.js'] },
       { name: 'State & data', items: ['XState', 'Redux', 'React Query', 'Valtio', 'React Context', 'GraphQL (Apollo)', 'REST'] },
-      { name: 'Design systems & UI', items: ['Storybook', 'Radix UI', 'Material UI', 'Stitches', 'Semantic HTML', 'Responsive UI'] },
-      { name: 'Testing', items: ['Vitest', 'Jest', 'React Testing Library'] },
+      { name: 'Design systems & UI', items: ['Storybook', 'Radix UI', 'Material UI', 'Tailwind CSS', 'Stitches', 'Semantic HTML', 'Responsive UI'] },
+      { name: 'Testing', items: ['Vitest', 'Jest', 'React Testing Library', 'Playwright', 'axe (accessibility)'] },
       { name: 'Build & delivery', items: ['Vite', 'Docker', 'GitHub Actions', 'LaunchDarkly', 'Datadog', 'Lighthouse', 'Git'] },
       { name: 'AI-assisted development', items: ['Claude Code', 'Cursor', 'MCP', 'AGENTS.md'] },
     ],
