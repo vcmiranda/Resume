@@ -39,6 +39,18 @@ function BlockView({ block }: { block: Block }) {
           ))}
         </ul>
       )
+    case 'figure':
+      return (
+        <figure>
+          <img
+            src={block.src}
+            alt={block.alt}
+            loading="lazy"
+            className="w-full border border-[var(--border)]"
+          />
+          <figcaption className="mt-2 text-sm text-muted">{block.caption}</figcaption>
+        </figure>
+      )
     case 'note':
       return (
         <p className="rounded-md border border-[var(--border)] bg-[var(--surface)] p-4 text-sm text-muted">

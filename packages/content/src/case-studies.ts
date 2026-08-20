@@ -12,6 +12,7 @@ export type Block =
   | { type: 'ul'; items: string[] }
   | { type: 'h3'; text: string }
   | { type: 'note'; text: string }
+  | { type: 'figure'; src: string; alt: string; caption: string }
   | { type: 'todo'; text: string }
 
 export type Section = { id: string; heading: string; blocks: Block[] }
@@ -149,8 +150,10 @@ export const caseStudies: CaseStudy[] = [
             text: 'Testing followed the same pragmatism: component behaviour and the shared library were covered first, because that is where a silent break propagates furthest — a shared table used by every section is the highest-leverage thing to hold still. I chose not to test generated GraphQL types or thin presentational wrappers around MUI — those tests assert that a library still works, and they fail for reasons that have nothing to do with the product.',
           },
           {
-            type: 'note',
-            text: 'Diagram to add: one box-and-arrow of the shape of the system — the internal admin frontend and its independent sections, GraphQL layer, backend services, component library as a shared dependency. Your own drawing, no internal names.',
+            type: 'figure',
+            src: '/system-diagram.svg',
+            alt: 'The internal admin frontend and its independently built sections sit above a GraphQL layer, which fans out to backend services owned by other teams. A shared component library is imported by every section, and a CI/CD pipeline runs typecheck, tests, build and preview deploys.',
+            caption: 'The shape of the system. Section names are generic — the structure is the point.',
           },
         ],
       },
